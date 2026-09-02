@@ -27,8 +27,16 @@ function GoogleG({ size = 18 }) {
   )
 }
 
+// Tasteful, brand-aligned avatar colours; each reviewer gets a stable one.
+const AVATAR_COLORS = ['#14563B', '#A6863B', '#2F6E5A', '#8A6D3B', '#4E7C64', '#B0873C']
+function colorFor(name) {
+  let h = 0
+  for (const ch of name) h = (h * 31 + ch.charCodeAt(0)) >>> 0
+  return AVATAR_COLORS[h % AVATAR_COLORS.length]
+}
+
 function Card(r, i) {
-  const initial = r.name.trim().charAt(0)
+  const initial = r.name.trim().charAt(0).toUpperCase()
   return (
     <figure
       key={i}
@@ -43,8 +51,11 @@ function Card(r, i) {
               className="h-11 w-11 shrink-0 rounded-full border border-gold/40 object-cover"
             />
           ) : (
-            <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-gold/40 bg-ivory">
-              <span className="font-display text-lg text-emerald">{initial}</span>
+            <span
+              className="grid h-11 w-11 shrink-0 place-items-center rounded-full ring-1 ring-gold/30"
+              style={{ backgroundColor: colorFor(r.name) }}
+            >
+              <span className="font-display text-lg text-ivory">{initial}</span>
             </span>
           )}
           <div>

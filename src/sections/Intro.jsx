@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom'
 import Reveal from '../components/Reveal'
-import Parallax from '../components/Parallax'
 import Icon from '../components/Icons'
 import { CREDENTIALS, Reg } from '../components/Cred'
 
@@ -15,17 +14,15 @@ export default function Intro() {
               <div className="pointer-events-none absolute -inset-3 rounded-[1.6rem] border border-gold/40" />
               <div className="pointer-events-none absolute -inset-3 rounded-[1.6rem] shadow-lift" />
               <div className="relative overflow-hidden rounded-[1.3rem] bg-cream" style={{ aspectRatio: '4 / 3' }}>
-                <Parallax amount={70} className="absolute inset-0 h-[118%] -top-[9%]">
-                  <img
-                    src="/family.webp"
-                    alt="Ashok Sanghavi with family"
-                    className="h-full w-full object-cover"
-                    onError={(e) => {
-                      e.currentTarget.style.display = 'none'
-                      e.currentTarget.parentElement.parentElement.querySelector('[data-ph]').style.display = 'flex'
-                    }}
-                  />
-                </Parallax>
+                <img
+                  src="/family.webp"
+                  alt="Ashok Sanghavi with family"
+                  className="absolute inset-0 h-full w-full object-cover object-top"
+                  onError={(e) => {
+                    e.currentTarget.style.display = 'none'
+                    e.currentTarget.parentElement.querySelector('[data-ph]').style.display = 'flex'
+                  }}
+                />
                 <div
                   data-ph
                   className="absolute inset-0 hidden flex-col items-center justify-center gap-3 text-center"
