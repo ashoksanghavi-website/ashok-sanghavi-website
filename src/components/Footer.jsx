@@ -204,7 +204,15 @@ export default function Footer() {
             Advisory services offered through {firm.entity}.
           </p>
           <p className="font-sans text-[0.78rem] text-sage-light/60">
-            Designed by <span className="font-semibold text-gold-light">Automated Codes</span>
+            Designed by{' '}
+            <a
+              href="https://www.automatedcodes.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-gold-light transition-colors hover:text-gold underline-offset-2 hover:underline"
+            >
+              Automated Codes
+            </a>
           </p>
         </div>
       </div>
