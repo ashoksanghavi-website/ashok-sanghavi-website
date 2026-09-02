@@ -118,9 +118,11 @@ function MobileHero() {
         }}
       />
 
-      {/* trust badge */}
-      <div className="absolute right-4 top-[calc(env(safe-area-inset-top,0px)+5rem)] z-20">
-        <div className="flex items-center gap-2.5 rounded-full border border-gold/40 bg-ivory/12 px-3.5 py-2 backdrop-blur-md">
+      {/* headline + CTA, anchored low */}
+      <div className="absolute inset-x-0 bottom-[13vh] z-20 px-6">
+        {/* trust chip — kept inside the content block so it never clips at the
+            top edge / notch or collides with the header on phones */}
+        <div className="mb-5 inline-flex items-center gap-2.5 rounded-full border border-gold/40 bg-ivory/12 px-3.5 py-2 backdrop-blur-md">
           <span className="relative flex h-2 w-2">
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-sage-light opacity-70" />
             <span className="relative inline-flex h-2 w-2 rounded-full bg-sage-light" />
@@ -129,10 +131,6 @@ function MobileHero() {
             <CountUp value={30} suffix="+" className="text-gold-light" /> <span className="text-ivory/85">Years of Trust</span>
           </span>
         </div>
-      </div>
-
-      {/* headline + CTA, anchored low */}
-      <div className="absolute inset-x-0 bottom-[13vh] z-20 px-6">
         <p
           className="eyebrow font-bold"
           style={{ color: '#F3E0AE', textShadow: '0 1px 2px rgba(10,38,26,0.98), 0 2px 12px rgba(10,38,26,0.85)' }}
