@@ -80,7 +80,7 @@ export default function BlogArticle() {
 
   return (
     <PageTransition>
-      <Seo title={post.title} description={post.excerpt} />
+      <Seo title={post.title} description={post.excerpt} type="article" image={post.cover_url || undefined} />
 
       {/* Article header */}
       <header className="relative overflow-hidden">

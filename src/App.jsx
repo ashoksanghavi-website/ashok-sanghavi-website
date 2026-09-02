@@ -8,6 +8,7 @@ import GetInTouchPopup from './components/GetInTouchPopup'
 import CookieConsent from './components/CookieConsent'
 import { ScheduleProvider } from './components/ScheduleModal'
 import ErrorBoundary from './components/ErrorBoundary'
+import StructuredData from './components/StructuredData'
 import { SiteContentProvider } from './lib/useSiteContent'
 import Home from './pages/Home'
 import About from './pages/About'
@@ -55,6 +56,7 @@ export default function App() {
     <ErrorBoundary resetKey={location.pathname}>
     <SiteContentProvider>
     <ScheduleProvider>
+      <StructuredData />
       <div className="grain-overlay" aria-hidden="true" />
       <Header />
       <ScrollManager />

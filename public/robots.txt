@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ashok-sanghavi-website-tawny.vercel.app/sitemap.xml

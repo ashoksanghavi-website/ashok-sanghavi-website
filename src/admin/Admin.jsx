@@ -64,7 +64,7 @@ function Shell({ email, onLogout, children }) {
     return (
       <Link
         to={to}
-        className={`rounded-lg px-3.5 py-2 text-[0.9rem] font-medium transition ${
+        className={`shrink-0 rounded-lg px-3 py-1.5 text-[0.88rem] font-medium transition sm:px-3.5 sm:py-2 sm:text-[0.9rem] ${
           active ? 'bg-emerald text-ivory' : 'text-emerald hover:bg-emerald/8'
         }`}
       >
@@ -75,24 +75,30 @@ function Shell({ email, onLogout, children }) {
   return (
     <div className="min-h-screen bg-cream text-ink">
       <header className="sticky top-0 z-10 border-b border-emerald/10 bg-white/90 backdrop-blur">
-        <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-3">
-          <div className="flex items-center gap-4">
-            <img src="/logo.png" alt="" className="h-8 w-8 rounded-full" />
-            <nav className="flex items-center gap-1">
-              {nav('/admin/pages', 'Pages')}
-              {nav('/admin/posts', 'Blog')}
-              {nav('/admin/media', 'Media')}
-              {nav('/admin/inbox', 'Inbox')}
-            </nav>
+        <div className="mx-auto max-w-5xl px-4 sm:px-6">
+          {/* top row: logo + account/logout */}
+          <div className="flex items-center justify-between gap-3 py-2.5 sm:py-3">
+            <Link to="/admin/pages" className="flex items-center gap-2.5">
+              <img src="/logo.png" alt="" className="h-8 w-8 rounded-full" />
+              <span className="font-display text-[1.05rem] leading-none text-emerald">Admin</span>
+            </Link>
+            <div className="flex items-center gap-2 text-[0.85rem] sm:gap-3">
+              <a href="/" target="_blank" rel="noreferrer" className="hidden text-ink-soft hover:text-emerald sm:inline">View site ↗</a>
+              <Link to="/admin/account" className="hidden text-ink-soft hover:text-emerald md:inline">{email}</Link>
+              <button onClick={onLogout} className={`${btnGhost} px-3 py-1.5 text-[0.82rem] sm:px-4 sm:py-2.5 sm:text-[0.9rem]`}>Log out</button>
+            </div>
           </div>
-          <div className="flex items-center gap-3 text-[0.85rem]">
-            <a href="/" target="_blank" rel="noreferrer" className="text-ink-soft hover:text-emerald">View site ↗</a>
-            <Link to="/admin/account" className="hidden text-ink-soft hover:text-emerald sm:inline">{email}</Link>
-            <button onClick={onLogout} className={btnGhost}>Log out</button>
-          </div>
+          {/* nav row: horizontally scrollable on small screens so it never overflows */}
+          <nav className="-mx-4 flex items-center gap-1 overflow-x-auto px-4 pb-2 sm:mx-0 sm:px-0 sm:pb-2.5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            {nav('/admin/pages', 'Pages')}
+            {nav('/admin/posts', 'Blog')}
+            {nav('/admin/media', 'Media')}
+            {nav('/admin/inbox', 'Inbox')}
+            <a href="/" target="_blank" rel="noreferrer" className="shrink-0 rounded-lg px-3 py-1.5 text-[0.88rem] font-medium text-ink-soft hover:bg-emerald/8 sm:hidden">View site ↗</a>
+          </nav>
         </div>
       </header>
-      <main className="mx-auto max-w-5xl px-6 py-8">{children}</main>
+      <main className="mx-auto max-w-5xl px-4 py-6 sm:px-6 sm:py-8">{children}</main>
     </div>
   )
 }

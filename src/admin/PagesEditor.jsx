@@ -107,11 +107,11 @@ export default function PagesEditor() {
 
       {/* sticky save bar */}
       <div className="fixed inset-x-0 bottom-0 z-20 border-t border-emerald/10 bg-white/95 backdrop-blur">
-        <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-3">
-          <span className="text-[0.85rem] text-ink-muted">
+        <div className="mx-auto flex max-w-5xl items-center justify-between gap-3 px-4 py-3 sm:px-6">
+          <span className="text-[0.82rem] text-ink-muted sm:text-[0.85rem]">
             {saved ? 'All changes saved.' : dirty.length ? `${dirty.length} unsaved change${dirty.length > 1 ? 's' : ''}` : 'No changes'}
           </span>
-          <button className={btnGold} disabled={busy || !dirty.length} onClick={saveAll}>
+          <button className={`${btnGold} shrink-0`} disabled={busy || !dirty.length} onClick={saveAll}>
             {busy ? 'Saving…' : 'Save changes'}
           </button>
         </div>
