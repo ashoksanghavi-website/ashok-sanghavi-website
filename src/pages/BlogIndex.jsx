@@ -7,6 +7,7 @@ import Reveal from '../components/Reveal'
 import ImageSlot from '../components/ImageSlot'
 import Icon from '../components/Icons'
 import { usePosts, coverSrc } from '../lib/usePosts'
+import { useSiteContent } from '../lib/useSiteContent'
 
 export function formatDate(d) {
   if (!d) return ''
@@ -14,6 +15,7 @@ export function formatDate(d) {
 }
 
 export default function BlogIndex() {
+  const { t } = useSiteContent()
   const { posts } = usePosts()
   const [featured, ...rest] = posts
 
@@ -24,9 +26,9 @@ export default function BlogIndex() {
         description="Notes on planning, tax and legacy from Ashok Sanghavi Financial Advisory."
       />
       <PageHero
-        eyebrow="Journal"
-        title="Notes on planning and tax."
-        intro="Plain spoken thoughts on the strategies, stories and lessons that shape a secure financial life."
+        eyebrow={t('blog.hero.eyebrow')}
+        title={t('blog.hero.title')}
+        intro={t('blog.hero.intro')}
         crumbs={[{ label: 'Home', to: '/' }, { label: 'Blog' }]}
       />
 

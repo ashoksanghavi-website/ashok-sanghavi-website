@@ -1,11 +1,13 @@
 import CTASection from '../components/CTASection'
+import { useSiteContent } from '../lib/useSiteContent'
 
 export default function FinalCTA() {
+  const { t } = useSiteContent()
   return (
     <CTASection
-      eyebrow="Let us begin"
-      heading="Yes, I am interested in a no cost, no obligation consultation."
-      sub="A calm, unhurried conversation about where you are and where you want to be. No pressure, no cost, just clarity about your options."
+      eyebrow={t('home.cta.eyebrow')}
+      heading={t('home.cta.heading')}
+      sub={t('home.cta.sub')}
     />
   )
 }

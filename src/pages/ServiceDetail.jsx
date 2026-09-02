@@ -7,8 +7,10 @@ import Reveal from '../components/Reveal'
 import Icon from '../components/Icons'
 import { services } from '../lib/site'
 import { serviceDetails } from '../lib/content'
+import { useSiteContent } from '../lib/useSiteContent'
 
 export default function ServiceDetail() {
+  const { t } = useSiteContent()
   const { slug } = useParams()
   const service = services.find((s) => s.slug === slug)
   const detail = serviceDetails[slug]
@@ -39,7 +41,7 @@ export default function ServiceDetail() {
             <p className="eyebrow">Overview</p>
           </Reveal>
           <Reveal delay={120}>
-            <p className="max-w-2xl text-lead text-ink">{detail.overview}</p>
+            <p className="max-w-2xl whitespace-pre-line text-lead text-ink">{t(`service.${slug}.overview`)}</p>
           </Reveal>
         </div>
       </section>

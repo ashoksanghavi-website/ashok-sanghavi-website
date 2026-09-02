@@ -6,8 +6,10 @@ import CTASection from '../components/CTASection'
 import Reveal from '../components/Reveal'
 import Icon from '../components/Icons'
 import { watchLearnSections, concepts } from '../lib/content'
+import { useSiteContent } from '../lib/useSiteContent'
 
 export default function WatchLearnHub() {
+  const { t } = useSiteContent()
   return (
     <PageTransition>
       <Seo
@@ -15,9 +17,9 @@ export default function WatchLearnHub() {
         description="A calm library of financial ideas, explained simply. Tax, retirement, protection and business strategies made clear."
       />
       <PageHero
-        eyebrow="Watch and learn"
-        title="Clear ideas, calmly explained."
-        intro="A growing library of the strategies we use most, each one explained in plain language, without the jargon."
+        eyebrow={t('watch.hero.eyebrow')}
+        title={t('watch.hero.title')}
+        intro={t('watch.hero.intro')}
         crumbs={[{ label: 'Home', to: '/' }, { label: 'Watch and Learn' }]}
       />
 
@@ -40,9 +42,9 @@ export default function WatchLearnHub() {
                       <Icon name={i === 0 ? 'book' : 'compass'} size={26} />
                     </span>
                     <h2 className="mt-7 font-display text-[1.9rem] leading-tight text-emerald sm:text-[2.2rem]">
-                      {sec.title}
+                      {t(`watch.${sec.slug}.title`)}
                     </h2>
-                    <p className="mt-3 max-w-md text-body text-ink-soft">{sec.intro}</p>
+                    <p className="mt-3 max-w-md whitespace-pre-line text-body text-ink-soft">{t(`watch.${sec.slug}.intro`)}</p>
                   </div>
                   <div className="relative mt-8 flex items-center justify-between">
                     <span className="font-sans text-[0.8rem] uppercase tracking-[0.2em] text-ink-muted">
@@ -65,9 +67,9 @@ export default function WatchLearnHub() {
       </section>
 
       <CTASection
-        eyebrow="Have a question?"
-        heading="Prefer to talk it through in person?"
-        sub="Every idea here is easier with context. We are glad to walk you through what applies to your situation."
+        eyebrow={t('watch.cta.eyebrow')}
+        heading={t('watch.cta.heading')}
+        sub={t('watch.cta.sub')}
         variant="ring"
       />
     </PageTransition>

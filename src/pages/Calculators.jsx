@@ -6,8 +6,10 @@ import CTASection from '../components/CTASection'
 import Reveal from '../components/Reveal'
 import Icon from '../components/Icons'
 import { calculators } from '../lib/content'
+import { useSiteContent } from '../lib/useSiteContent'
 
 export default function Calculators() {
+  const { t } = useSiteContent()
   return (
     <PageTransition>
       <Seo
@@ -15,9 +17,9 @@ export default function Calculators() {
         description="A set of simple financial calculators for investing, retirement, mortgage and income tax planning."
       />
       <PageHero
-        eyebrow="Tools"
-        title="Financial calculators."
-        intro="A few simple tools to help you picture the numbers. Each one opens in a new tab."
+        eyebrow={t('calc.hero.eyebrow')}
+        title={t('calc.hero.title')}
+        intro={t('calc.hero.intro')}
         crumbs={[{ label: 'Home', to: '/' }, { label: 'Calculators' }]}
       />
 
@@ -73,11 +75,10 @@ export default function Calculators() {
                   <Icon name="compass" size={26} />
                 </span>
                 <h2 className="relative mt-7 font-display text-[1.45rem] leading-snug text-ivory">
-                  Want the number for your exact situation?
+                  {t('calc.card.heading')}
                 </h2>
-                <p className="relative mt-3 flex-1 text-[0.95rem] leading-relaxed text-sage-light">
-                  These tools give a rough picture. A short conversation gives you a real one, built around your income,
-                  your goals, and your tax position.
+                <p className="relative mt-3 flex-1 whitespace-pre-line text-[0.95rem] leading-relaxed text-sage-light">
+                  {t('calc.card.body')}
                 </p>
                 <Link
                   to="/contact"
@@ -90,18 +91,17 @@ export default function Calculators() {
             </Reveal>
           </div>
           <Reveal>
-            <p className="mt-10 max-w-2xl text-[0.9rem] leading-relaxed text-ink-muted">
-              These calculators are provided for general illustration only. They do not account for your full situation
-              and are not advice. For guidance tailored to you, we would be glad to talk.
+            <p className="mt-10 max-w-2xl whitespace-pre-line text-[0.9rem] leading-relaxed text-ink-muted">
+              {t('calc.disclaimer')}
             </p>
           </Reveal>
         </div>
       </section>
 
       <CTASection
-        eyebrow="Beyond the numbers"
-        heading="A calculator is a start. The plan is the rest."
-        sub="Numbers on a screen cannot see your whole picture. We can. Let us turn an estimate into a real strategy."
+        eyebrow={t('calc.cta.eyebrow')}
+        heading={t('calc.cta.heading')}
+        sub={t('calc.cta.sub')}
         variant="contact"
       />
     </PageTransition>

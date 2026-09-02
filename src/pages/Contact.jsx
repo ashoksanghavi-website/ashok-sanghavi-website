@@ -5,6 +5,7 @@ import PageHero from '../components/PageHero'
 import Reveal from '../components/Reveal'
 import Icon from '../components/Icons'
 import { firm, social } from '../lib/site'
+import { useSiteContent } from '../lib/useSiteContent'
 
 const mapSrc =
   'https://www.google.com/maps?q=25416%20County%206%20Road%20Suite%20102%20Elkhart%20IN%2046514&output=embed'
@@ -24,6 +25,7 @@ const inputCls =
   'w-full rounded-xl border border-gold/25 bg-ivory px-4 py-3 font-sans text-[0.98rem] text-ink outline-none transition-all duration-300 placeholder:text-ink-muted/60 focus:border-gold focus:ring-2 focus:ring-gold/25'
 
 export default function Contact() {
+  const { t } = useSiteContent()
   const [status, setStatus] = useState('idle') // idle | sending | done | error
 
   async function handleSubmit(e) {
@@ -49,9 +51,9 @@ export default function Contact() {
         description="Reach Ashok Sanghavi Financial Advisory in Elkhart, Indiana. A no cost, no obligation conversation about your future."
       />
       <PageHero
-        eyebrow="Contact"
-        title="Let us begin the conversation."
-        intro="A calm, no cost, no obligation conversation about where you are and where you want to be."
+        eyebrow={t('contact.hero.eyebrow')}
+        title={t('contact.hero.title')}
+        intro={t('contact.hero.intro')}
         crumbs={[{ label: 'Home', to: '/' }, { label: 'Contact' }]}
       />
 
@@ -72,9 +74,9 @@ export default function Contact() {
                 </div>
               ) : (
                 <>
-                  <h2 className="font-display text-[1.8rem] text-emerald sm:text-[2.1rem]">Send us a note</h2>
-                  <p className="mt-3 text-body text-ink-soft">
-                    Tell us a little about what you are looking for and we will take it from there.
+                  <h2 className="font-display text-[1.8rem] text-emerald sm:text-[2.1rem]">{t('contact.form.heading')}</h2>
+                  <p className="mt-3 whitespace-pre-line text-body text-ink-soft">
+                    {t('contact.form.body')}
                   </p>
                   <form onSubmit={handleSubmit} className="mt-8 space-y-5">
                     <div className="grid gap-5 sm:grid-cols-2">
@@ -111,9 +113,9 @@ export default function Contact() {
           {/* Details */}
           <Reveal delay={120}>
             <div className="flex h-full flex-col">
-              <p className="eyebrow">Reach us directly</p>
+              <p className="eyebrow">{t('contact.details.eyebrow')}</p>
               <h2 className="mt-5 font-display text-[2rem] leading-tight sm:text-[2.4rem]">
-                We would be glad to hear from you.
+                {t('contact.details.heading')}
               </h2>
 
               <ul className="mt-8 space-y-5">

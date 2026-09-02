@@ -8,8 +8,10 @@ import ImageSlot from '../components/ImageSlot'
 import Icon from '../components/Icons'
 import { services } from '../lib/site'
 import { serviceDetails } from '../lib/content'
+import { useSiteContent } from '../lib/useSiteContent'
 
 export default function ServicesHub() {
+  const { t, img } = useSiteContent()
   return (
     <PageTransition>
       <Seo
@@ -17,9 +19,9 @@ export default function ServicesHub() {
         description="Eight disciplines under one roof: wealth management, retirement, tax, estate, protection, business, benefits and long term care."
       />
       <PageHero
-        eyebrow="What we do"
-        title="Eight disciplines, one considered plan."
-        intro="Every part of your financial life connects. We bring them together with care, so nothing works against anything else."
+        eyebrow={t('services.hero.eyebrow')}
+        title={t('services.hero.title')}
+        intro={t('services.hero.intro')}
         crumbs={[{ label: 'Home', to: '/' }, { label: 'Services' }]}
       />
 
@@ -27,14 +29,12 @@ export default function ServicesHub() {
       <section className="bg-ivory py-24 sm:py-28">
         <div className="container-lux grid items-center gap-12 lg:grid-cols-[1fr_0.9fr] lg:gap-16">
           <Reveal>
-            <p className="eyebrow">Our approach</p>
+            <p className="eyebrow">{t('services.approach.eyebrow')}</p>
             <h2 className="mt-5 max-w-lg font-display text-[2rem] leading-[1.14] sm:text-[2.6rem]">
-              One plan, considered from every angle.
+              {t('services.approach.heading')}
             </h2>
-            <p className="mt-6 max-w-xl text-body text-ink-soft">
-              We rarely look at a single decision in isolation. A tax choice affects retirement, a retirement choice
-              affects your estate, and your estate affects the people you love. We coordinate all of it, so every part
-              of your plan pulls in the same direction.
+            <p className="mt-6 max-w-xl whitespace-pre-line text-body text-ink-soft">
+              {t('services.approach.body')}
             </p>
             <Link to="/contact" className="mt-8 inline-flex items-center gap-2 link-gold">
               Start a conversation
@@ -43,7 +43,7 @@ export default function ServicesHub() {
           </Reveal>
           <Reveal delay={140}>
             {/* EDIT: optional, drop /public/media/lobby.jpg (already provided) */}
-            <ImageSlot src="/media/lobby.jpg" label="Our office" ratio="5 / 4" framed parallax icon="building" />
+            <ImageSlot src={img('services.approach.image')} label="Our office" ratio="5 / 4" framed parallax icon="building" />
           </Reveal>
         </div>
       </section>
@@ -52,9 +52,9 @@ export default function ServicesHub() {
       <section className="bg-cream py-24 sm:py-28">
         <div className="container-lux">
           <Reveal>
-            <p className="eyebrow">The full picture</p>
+            <p className="eyebrow">{t('services.grid.eyebrow')}</p>
             <h2 className="mt-5 max-w-2xl font-display text-[2rem] leading-[1.14] sm:text-[2.6rem]">
-              Explore each discipline in detail.
+              {t('services.grid.heading')}
             </h2>
           </Reveal>
           <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
@@ -93,9 +93,9 @@ export default function ServicesHub() {
       </section>
 
       <CTASection
-        eyebrow="Find your fit"
-        heading="Not sure where to start? Let us point the way."
-        sub="Tell us a little about your situation and we will show you which of these disciplines matters most for you."
+        eyebrow={t('services.cta.eyebrow')}
+        heading={t('services.cta.heading')}
+        sub={t('services.cta.sub')}
         variant="seal"
       />
     </PageTransition>

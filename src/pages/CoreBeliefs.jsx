@@ -4,8 +4,10 @@ import PageHero from '../components/PageHero'
 import CTASection from '../components/CTASection'
 import Reveal from '../components/Reveal'
 import { coreBeliefs } from '../lib/content'
+import { useSiteContent } from '../lib/useSiteContent'
 
 export default function CoreBeliefs() {
+  const { t } = useSiteContent()
   return (
     <PageTransition>
       <Seo
@@ -13,9 +15,9 @@ export default function CoreBeliefs() {
         description="The values behind our advice. We begin with relationships, because trust is never assumed, it is earned."
       />
       <PageHero
-        eyebrow="Core beliefs"
-        title="What we believe about your money."
-        intro="Trust is never assumed. It is earned, slowly and deliberately, over the course of a relationship."
+        eyebrow={t('beliefs.hero.eyebrow')}
+        title={t('beliefs.hero.title')}
+        intro={t('beliefs.hero.intro')}
         crumbs={[{ label: 'Home', to: '/' }, { label: 'Core Beliefs' }]}
       />
 
@@ -23,9 +25,8 @@ export default function CoreBeliefs() {
       <section className="bg-ivory py-24 sm:py-28">
         <div className="container-lux">
           <Reveal>
-            <p className="mx-auto max-w-4xl text-center font-display text-[1.7rem] leading-[1.4] text-emerald sm:text-[2.15rem]">
-              We begin with relationships, because success is measured not only in numbers, but in the clarity,
-              confidence and security you carry into the future.
+            <p className="mx-auto max-w-4xl whitespace-pre-line text-center font-display text-[1.7rem] leading-[1.4] text-emerald sm:text-[2.15rem]">
+              {t('beliefs.lead')}
             </p>
           </Reveal>
         </div>
@@ -47,8 +48,8 @@ export default function CoreBeliefs() {
                   </span>
                   <div className="sm:pt-3">
                     <div className="mb-4 h-px w-16 bg-gold/50" />
-                    <h2 className="font-display text-[1.7rem] leading-tight text-emerald sm:text-[2.1rem]">{b.title}</h2>
-                    <p className="mt-4 max-w-xl text-body text-ink-soft">{b.body}</p>
+                    <h2 className="font-display text-[1.7rem] leading-tight text-emerald sm:text-[2.1rem]">{t(`belief.${i}.title`)}</h2>
+                    <p className="mt-4 max-w-xl whitespace-pre-line text-body text-ink-soft">{t(`belief.${i}.body`)}</p>
                   </div>
                 </div>
               </Reveal>
@@ -58,9 +59,9 @@ export default function CoreBeliefs() {
       </section>
 
       <CTASection
-        eyebrow="Experience it"
-        heading="See what a relationship first practice feels like."
-        sub="Beliefs are easy to write and harder to live by. Let us show you the difference in a single conversation."
+        eyebrow={t('beliefs.cta.eyebrow')}
+        heading={t('beliefs.cta.heading')}
+        sub={t('beliefs.cta.sub')}
         variant="minimal"
       />
     </PageTransition>

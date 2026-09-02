@@ -6,24 +6,28 @@ import CTASection from '../components/CTASection'
 import Reveal from '../components/Reveal'
 import Icon from '../components/Icons'
 import { watchLearnSections, concepts } from '../lib/content'
+import { useSiteContent } from '../lib/useSiteContent'
 
 export default function WatchLearnSection() {
+  const { t } = useSiteContent()
   const { slug } = useParams()
   const section = watchLearnSections.find((s) => s.slug === slug)
   if (!section) return <Navigate to="/watch-and-learn" replace />
   const items = concepts.filter((c) => c.group === section.group)
+  const title = t(`watch.${slug}.title`)
+  const intro = t(`watch.${slug}.intro`)
 
   return (
     <PageTransition>
-      <Seo title={section.title} description={section.intro} />
+      <Seo title={title} description={intro} />
       <PageHero
         eyebrow="Watch and learn"
-        title={section.title}
-        intro={section.intro}
+        title={title}
+        intro={intro}
         crumbs={[
           { label: 'Home', to: '/' },
           { label: 'Watch and Learn', to: '/watch-and-learn' },
-          { label: section.title },
+          { label: title },
         ]}
       />
 

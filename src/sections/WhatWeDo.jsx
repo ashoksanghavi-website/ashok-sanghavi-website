@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import Reveal from '../components/Reveal'
 import Icon from '../components/Icons'
 import { services } from '../lib/site'
+import { useSiteContent } from '../lib/useSiteContent'
 
 const EASE = [0.16, 1, 0.3, 1]
 const container = {
@@ -15,6 +16,7 @@ const item = {
 }
 
 export default function WhatWeDo() {
+  const { t } = useSiteContent()
   return (
     <section id="services" className="relative overflow-hidden bg-cream py-24 sm:py-32">
       {/* faint gold glows for depth */}
@@ -30,20 +32,19 @@ export default function WhatWeDo() {
       <div className="container-lux relative">
         <div className="mx-auto max-w-2xl text-center">
           <Reveal>
-            <p className="eyebrow eyebrow--center justify-center">What we do</p>
+            <p className="eyebrow eyebrow--center justify-center">{t('home.whatwedo.eyebrow')}</p>
           </Reveal>
           <Reveal delay={80}>
             <h2 className="mt-5 font-display text-4xl leading-tight sm:text-5xl">
-              Eight disciplines, one considered plan.
+              {t('home.whatwedo.heading')}
             </h2>
           </Reveal>
           <Reveal delay={140}>
             <span className="mx-auto mt-6 block h-px w-16 bg-gold/50" />
           </Reveal>
           <Reveal delay={200}>
-            <p className="mt-6 font-sans text-[1.05rem] leading-relaxed text-ink-soft">
-              Every part of your financial life connects. We bring them together with care, so nothing works
-              against anything else.
+            <p className="mt-6 whitespace-pre-line font-sans text-[1.05rem] leading-relaxed text-ink-soft">
+              {t('home.whatwedo.body')}
             </p>
           </Reveal>
         </div>
