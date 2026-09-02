@@ -1,6 +1,8 @@
 import { useEffect, useState, useCallback } from 'react'
 import { Routes, Route, Link, useNavigate, useParams, useLocation, Navigate } from 'react-router-dom'
 import { api } from './api'
+import RichText from './RichText'
+import { MediaManager, MediaPickerModal } from './Media'
 
 const slugify = (s) =>
   String(s).toLowerCase().trim().replace(/[^\w\s-]/g, '').replace(/[\s_-]+/g, '-').replace(/^-+|-+$/g, '')
@@ -77,6 +79,7 @@ function Shell({ email, onLogout, children }) {
             <img src="/logo.png" alt="" className="h-8 w-8 rounded-full" />
             <nav className="flex items-center gap-1">
               {nav('/admin/posts', 'Blog')}
+              {nav('/admin/media', 'Media')}
               {nav('/admin/inbox', 'Inbox')}
             </nav>
           </div>
@@ -155,6 +158,7 @@ function PostEditor() {
   const [err, setErr] = useState('')
   const [busy, setBusy] = useState(false)
   const [slugTouched, setSlugTouched] = useState(!isNew)
+  const [coverPicker, setCoverPicker] = useState(false)
 
   useEffect(() => {
     if (isNew) return
@@ -209,14 +213,27 @@ function PostEditor() {
         </div>
       </div>
 
-      <label className={`${label} mt-4`}>Cover image URL</label>
-      <input className={field} value={form.cover_url || ''} onChange={(e) => set('cover_url', e.target.value)} placeholder="https://…" />
+      <label className={`${label} mt-4`}>Cover image</label>
+      <div className="flex items-start gap-3">
+        <div className="grid h-20 w-28 shrink-0 place-items-center overflow-hidden rounded-lg border border-emerald/15 bg-white text-[0.7rem] text-ink-muted">
+          {form.cover_url ? <img src={form.cover_url} alt="" className="h-full w-full object-cover" /> : 'No cover'}
+        </div>
+        <div className="flex-1">
+          <input className={field} value={form.cover_url || ''} onChange={(e) => set('cover_url', e.target.value)} placeholder="Paste a URL or choose from the library" />
+          <div className="mt-2 flex gap-2">
+            <button type="button" className={btnGhost} onClick={() => setCoverPicker(true)}>Choose / upload</button>
+            {form.cover_url && <button type="button" className={btnGhost} onClick={() => set('cover_url', '')}>Remove</button>}
+          </div>
+        </div>
+      </div>
 
       <label className={`${label} mt-4`}>Excerpt</label>
-      <textarea className={`${field} resize-y`} rows={2} value={form.excerpt || ''} onChange={(e) => set('excerpt', e.target.value)} />
+      <textarea className={`${field} resize-y`} rows={2} value={form.excerpt || ''} onChange={(e) => set('excerpt', e.target.value)} placeholder="A short summary shown on the blog list" />
 
       <label className={`${label} mt-4`}>Body</label>
-      <textarea className={`${field} resize-y font-mono text-[0.9rem]`} rows={14} value={form.body || ''} onChange={(e) => set('body', e.target.value)} placeholder="Write the article (plain text or HTML)…" />
+      <RichText value={form.body || ''} onChange={(html) => set('body', html)} />
+
+      <MediaPickerModal open={coverPicker} onClose={() => setCoverPicker(false)} onPick={(url) => { set('cover_url', url); setCoverPicker(false) }} />
 
       <label className="mt-5 flex items-center gap-2.5 text-[0.9rem] text-emerald">
         <input type="checkbox" checked={!!form.published} onChange={(e) => set('published', e.target.checked)} className="h-4 w-4 accent-emerald" />
@@ -348,6 +365,7 @@ export default function Admin() {
         <Route path="posts" element={<PostsList />} />
         <Route path="posts/new" element={<PostEditor />} />
         <Route path="posts/:slug" element={<PostEditor />} />
+        <Route path="media" element={<MediaManager />} />
         <Route path="inbox" element={<Inbox />} />
         <Route path="account" element={<Account />} />
         <Route path="*" element={<Navigate to="/admin/posts" replace />} />

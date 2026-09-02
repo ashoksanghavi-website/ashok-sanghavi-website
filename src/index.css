@@ -312,6 +312,7 @@
 .article-html { color: #4A4A45; font-size: 1.075rem; line-height: 1.75; }
 .article-html > :first-child { margin-top: 0; }
 .article-html p { margin-top: 1.5rem; }
+.article-html div { margin-top: 1.5rem; }
 .article-html h2, .article-html h3 {
   margin-top: 3rem; color: #14563B;
   font-family: 'Fraunces', Georgia, serif; line-height: 1.15;
