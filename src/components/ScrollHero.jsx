@@ -133,12 +133,15 @@ function MobileHero() {
 
       {/* headline + CTA, anchored low */}
       <div className="absolute inset-x-0 bottom-[13vh] z-20 px-6">
-        <p className="eyebrow text-gold-light" style={{ textShadow: '0 2px 18px rgba(14,58,40,0.6)' }}>
+        <p
+          className="eyebrow font-bold"
+          style={{ color: '#F3E0AE', textShadow: '0 1px 2px rgba(10,38,26,0.98), 0 2px 12px rgba(10,38,26,0.85)' }}
+        >
           {heroScenes[0].eyebrow}
         </p>
         <h1
           className="mt-4 max-w-[19rem] font-display text-[2.05rem] leading-[1.1] text-ivory"
-          style={{ textShadow: '0 2px 30px rgba(14,58,40,0.65)' }}
+          style={{ textShadow: '0 2px 4px rgba(10,38,26,0.9), 0 4px 30px rgba(10,38,26,0.72)' }}
         >
           {heroScenes[0].line}
         </h1>
@@ -409,7 +412,7 @@ export default function ScrollHero() {
           className="pointer-events-none absolute inset-0"
           style={{
             background:
-              'linear-gradient(100deg, rgba(14,58,40,0.62) 0%, rgba(14,58,40,0.42) 20%, rgba(14,58,40,0.12) 38%, rgba(14,58,40,0) 52%)',
+              'linear-gradient(100deg, rgba(12,52,36,0.78) 0%, rgba(12,52,36,0.55) 22%, rgba(14,58,40,0.2) 40%, rgba(14,58,40,0) 56%)',
           }}
         />
         {/* Gentle vignette */}
@@ -452,12 +455,15 @@ export default function ScrollHero() {
                 className="absolute bottom-0 left-6 max-w-[16rem] sm:left-10 sm:max-w-[22rem] lg:left-16 lg:max-w-[26rem]"
                 style={{ opacity: 0, transform: 'translateY(30px)', willChange: 'opacity, transform' }}
               >
-                <p className="eyebrow text-gold-light" style={{ textShadow: '0 2px 18px rgba(14,58,40,0.55)' }}>
+                <p
+                  className="eyebrow font-bold"
+                  style={{ color: '#F3E0AE', textShadow: '0 1px 2px rgba(10,38,26,0.98), 0 2px 12px rgba(10,38,26,0.85)' }}
+                >
                   {scene.eyebrow}
                 </p>
                 <h2
                   className="mt-5 font-display text-[1.7rem] leading-[1.12] text-ivory sm:text-[2.2rem] lg:text-[2.7rem]"
-                  style={{ textShadow: '0 2px 30px rgba(14,58,40,0.6), 0 1px 3px rgba(14,58,40,0.5)' }}
+                  style={{ textShadow: '0 2px 4px rgba(10,38,26,0.9), 0 4px 34px rgba(10,38,26,0.72), 0 1px 3px rgba(10,38,26,0.6)' }}
                 >
                   {scene.line}
                 </h2>
