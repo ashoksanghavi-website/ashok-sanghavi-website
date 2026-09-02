@@ -2,8 +2,7 @@ import { Link } from 'react-router-dom'
 import Reveal from '../components/Reveal'
 import Parallax from '../components/Parallax'
 import Icon from '../components/Icons'
-
-const credentials = ['CFP', 'ChFC', 'CLU', 'CPA (non practicing)', 'Chartered Accountant']
+import { CREDENTIALS, Reg } from '../components/Cred'
 
 export default function Intro() {
   return (
@@ -48,7 +47,7 @@ export default function Intro() {
                 <span className="font-display text-[1.05rem] text-emerald">Ashok Sanghavi</span>
                 <span className="h-4 w-px shrink-0 bg-gold/50" />
                 <span className="font-sans text-[0.66rem] font-semibold uppercase tracking-[0.16em] text-ink-muted">
-                  CFP · ChFC · CLU
+                  CFP<Reg /> · ChFC<Reg /> · CLU<Reg />
                 </span>
               </div>
             </div>
@@ -66,12 +65,13 @@ export default function Intro() {
             </Reveal>
             <Reveal delay={160}>
               <div className="mt-6 flex flex-wrap gap-2">
-                {credentials.map((c) => (
+                {CREDENTIALS.map((c) => (
                   <span
                     key={c}
                     className="rounded-full border border-gold/30 bg-cream px-3.5 py-1.5 font-sans text-[0.76rem] font-semibold tracking-wide text-emerald"
                   >
                     {c}
+                    <Reg />
                   </span>
                 ))}
               </div>
@@ -79,9 +79,9 @@ export default function Intro() {
             <Reveal delay={240}>
               <p className="mt-7 max-w-prose font-sans text-[1.05rem] leading-relaxed text-ink-soft">
                 For more than thirty years, Ashok Sanghavi has helped individuals, families and business owners
-                make calm, confident decisions about their money. A Certified Financial Planner with a background
-                as a Chartered Accountant and non practicing CPA, he brings the full picture together, tax,
-                retirement, protection and legacy, under one trusted roof.
+                make calm, confident decisions about their money. A Certified Financial Planner with a Chartered
+                Accountant background from India, he brings the full picture together, tax, retirement, protection
+                and legacy, under one trusted roof.
               </p>
             </Reveal>
             <Reveal delay={300}>

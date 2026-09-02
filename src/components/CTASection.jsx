@@ -1,7 +1,7 @@
-import { Link } from 'react-router-dom'
 import Reveal from './Reveal'
 import Icon from './Icons'
 import { firm } from '../lib/site'
+import { useSchedule } from './ScheduleModal'
 
 // One shared CTA API (eyebrow / heading / sub) with a family of DISTINCT,
 // compact, premium designs chosen per page via `variant`. No two pages share a
@@ -23,7 +23,8 @@ function Fleuron({ className = '' }) {
 
 // buttons ------------------------------------------------------------
 function GoldPrimary({ label = 'Schedule a meeting' }) {
-  return <Link to="/contact" className="btn-gold w-full sm:w-auto">{label}</Link>
+  const openSchedule = useSchedule()
+  return <button type="button" onClick={openSchedule} className="btn-gold w-full sm:w-auto">{label}</button>
 }
 function CallGhost() {
   return (
@@ -34,7 +35,8 @@ function CallGhost() {
   )
 }
 function EmeraldPrimary({ label = 'Schedule a meeting' }) {
-  return <Link to="/contact" className="btn-primary w-full sm:w-auto">{label}</Link>
+  const openSchedule = useSchedule()
+  return <button type="button" onClick={openSchedule} className="btn-primary w-full sm:w-auto">{label}</button>
 }
 function CallTextLink() {
   return (
@@ -67,6 +69,7 @@ function BandCTA({ eyebrow, heading, sub }) {
 
 // ── DARK: asymmetric split panel ────────────────────────────────────
 function PanelCTA({ eyebrow, heading, sub }) {
+  const openSchedule = useSchedule()
   return (
     <section className="relative overflow-hidden py-16 text-ivory sm:py-20" style={{ background: EMERALD_BG }}>
       <div className="pointer-events-none absolute inset-0 opacity-70" style={{ background: 'radial-gradient(60% 90% at 100% 100%, rgba(198,162,83,0.14), transparent 60%)' }} />
@@ -82,7 +85,7 @@ function PanelCTA({ eyebrow, heading, sub }) {
               <p className="font-sans text-[0.72rem] uppercase tracking-[0.22em] text-gold-light">Prefer to talk now?</p>
               <a href={firm.phoneHref} className="mt-3 block font-display text-[1.6rem] text-ivory transition-colors hover:text-gold-light">{firm.phone}</a>
               <p className="mt-2 text-[0.9rem] text-sage-light">Monday to Friday, a real person answers.</p>
-              <Link to="/contact" className="btn-gold mt-6 w-full justify-center">Schedule a meeting</Link>
+              <button type="button" onClick={openSchedule} className="btn-gold mt-6 w-full justify-center">Schedule a meeting</button>
             </div>
           </Reveal>
         </div>
@@ -93,6 +96,7 @@ function PanelCTA({ eyebrow, heading, sub }) {
 
 // ── DARK: monogram seal watermark, single action ────────────────────
 function SealCTA({ eyebrow, heading, sub }) {
+  const openSchedule = useSchedule()
   return (
     <section className="relative overflow-hidden py-16 text-ivory sm:py-20" style={{ background: EMERALD_BG }}>
       <div className="pointer-events-none absolute inset-0 grid place-items-center opacity-[0.06]">
@@ -104,7 +108,7 @@ function SealCTA({ eyebrow, heading, sub }) {
           <p className="eyebrow eyebrow--center mt-6 justify-center text-gold-light">{eyebrow}</p>
           <h2 className="mt-4 font-display text-[2rem] leading-[1.12] text-ivory sm:text-[2.5rem]">{heading}</h2>
           {sub && <p className="mx-auto mt-5 max-w-xl text-body text-sage-light">{sub}</p>}
-          <Link to="/contact" className="btn-gold mt-9">Book a consultation</Link>
+          <button type="button" onClick={openSchedule} className="btn-gold mt-9">Book a consultation</button>
         </Reveal>
       </div>
     </section>
@@ -113,6 +117,7 @@ function SealCTA({ eyebrow, heading, sub }) {
 
 // ── DARK: info chips, left aligned ──────────────────────────────────
 function ContactCTA({ eyebrow, heading, sub }) {
+  const openSchedule = useSchedule()
   return (
     <section className="relative overflow-hidden py-16 text-ivory sm:py-20" style={{ background: EMERALD_BG }}>
       <div className="container-lux relative z-10">
@@ -121,7 +126,7 @@ function ContactCTA({ eyebrow, heading, sub }) {
           <h2 className="mt-4 font-display text-[1.9rem] leading-[1.14] text-ivory sm:text-[2.4rem]">{heading}</h2>
           {sub && <p className="mt-4 max-w-xl text-body text-sage-light">{sub}</p>}
           <div className="mt-8 flex flex-wrap items-center gap-4">
-            <Link to="/contact" className="btn-gold">Schedule a meeting</Link>
+            <button type="button" onClick={openSchedule} className="btn-gold">Schedule a meeting</button>
             <a href={firm.phoneHref} className="inline-flex items-center gap-2.5 rounded-full border border-ivory/20 px-5 py-3 font-sans text-[0.92rem] text-ivory transition-all hover:border-gold hover:bg-gold/10">
               <Icon name="phone" size={17} className="text-gold-light" /> {firm.phone}
             </a>
@@ -204,6 +209,7 @@ function QuoteCTA({ eyebrow, heading, sub }) {
 
 // ── LIGHT: ultra-slim single line ───────────────────────────────────
 function MinimalCTA({ eyebrow, heading, sub }) {
+  const openSchedule = useSchedule()
   return (
     <section className="relative overflow-hidden py-14 sm:py-16" style={{ background: 'var(--ivory)' }}>
       <div className="container-lux relative">
@@ -215,7 +221,7 @@ function MinimalCTA({ eyebrow, heading, sub }) {
               <h2 className="mt-2 font-display text-[1.65rem] leading-tight text-emerald sm:text-[2.05rem]">{heading}</h2>
             </div>
           </div>
-          <Link to="/contact" className="btn-primary shrink-0">Book a consultation</Link>
+          <button type="button" onClick={openSchedule} className="btn-primary shrink-0">Book a consultation</button>
         </Reveal>
       </div>
     </section>

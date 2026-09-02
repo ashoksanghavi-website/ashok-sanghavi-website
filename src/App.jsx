@@ -6,6 +6,7 @@ import Header from './components/Header'
 import Footer from './components/Footer'
 import GetInTouchPopup from './components/GetInTouchPopup'
 import CookieConsent from './components/CookieConsent'
+import { ScheduleProvider } from './components/ScheduleModal'
 import Home from './pages/Home'
 import About from './pages/About'
 import CoreBeliefs from './pages/CoreBeliefs'
@@ -47,7 +48,7 @@ export default function App() {
   }
 
   return (
-    <>
+    <ScheduleProvider>
       <div className="grain-overlay" aria-hidden="true" />
       <Header />
       <ScrollManager />
@@ -72,6 +73,6 @@ export default function App() {
       <Footer />
       <GetInTouchPopup />
       <CookieConsent />
-    </>
+    </ScheduleProvider>
   )
 }

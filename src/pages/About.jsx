@@ -7,8 +7,7 @@ import Reveal from '../components/Reveal'
 import ImageSlot from '../components/ImageSlot'
 import Icon from '../components/Icons'
 import { whyChooseUs } from '../lib/content'
-
-const credentials = ['CFP', 'ChFC', 'CLU', 'CPA (non practicing)', 'Chartered Accountant']
+import { CREDENTIALS, Reg } from '../components/Cred'
 
 export default function About() {
   return (
@@ -35,7 +34,7 @@ export default function About() {
                 <span className="font-display text-[1.05rem] text-emerald">Ashok Sanghavi</span>
                 <span className="h-4 w-px shrink-0 bg-gold/50" />
                 <span className="font-sans text-[0.66rem] font-semibold uppercase tracking-[0.16em] text-ink-muted">
-                  CFP · ChFC · CLU
+                  CFP<Reg /> · ChFC<Reg /> · CLU<Reg />
                 </span>
               </div>
             </div>
@@ -52,12 +51,13 @@ export default function About() {
             </Reveal>
             <Reveal delay={150}>
               <div className="mt-6 flex flex-wrap gap-2">
-                {credentials.map((c) => (
+                {CREDENTIALS.map((c) => (
                   <span
                     key={c}
                     className="rounded-full border border-gold/30 bg-cream px-3.5 py-1.5 font-sans text-[0.76rem] font-semibold tracking-wide text-emerald"
                   >
                     {c}
+                    <Reg />
                   </span>
                 ))}
               </div>
@@ -65,10 +65,9 @@ export default function About() {
             <Reveal delay={220}>
               <p className="mt-7 max-w-prose text-body text-ink-soft">
                 Ashok Sanghavi is a Certified Financial Planner, a Chartered Financial Consultant and a Certified Life
-                Underwriter. He is also a non practicing Certified Public Accountant with a background as a Chartered
-                Accountant, and he passed the CPA exam in 1988. Over more than thirty years in financial services, he has
-                guided individuals, families, retirees and business owners through the decisions that shape a secure
-                future.
+                Underwriter. He also holds a Chartered Accountant background from India, and he passed the CPA exam in
+                1988. Over more than thirty years in financial services, he has guided individuals, families, retirees
+                and business owners through the decisions that shape a secure future.
               </p>
             </Reveal>
             <Reveal delay={280}>

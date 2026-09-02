@@ -3,6 +3,7 @@ import { Link, NavLink, useLocation } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import { nav, services, firm } from '../lib/site'
 import Icon from './Icons'
+import { useSchedule } from './ScheduleModal'
 
 function Wordmark({ compact, light }) {
   return (
@@ -55,6 +56,7 @@ function Wordmark({ compact, light }) {
 }
 
 export default function Header() {
+  const openSchedule = useSchedule()
   const [scrolled, setScrolled] = useState(false)
   const [pastHero, setPastHero] = useState(false)
   const [open, setOpen] = useState(false)
@@ -255,9 +257,9 @@ export default function Header() {
               className="h-7 w-px"
               style={{ background: light ? 'rgba(217,190,126,0.4)' : 'rgba(198,162,83,0.35)' }}
             />
-            <Link to="/contact" className="btn-primary text-[0.9rem]">
+            <button type="button" onClick={openSchedule} className="btn-primary text-[0.9rem]">
               Book a consultation
-            </Link>
+            </button>
           </div>
 
           {/* Mobile toggle */}
@@ -417,9 +419,13 @@ export default function Header() {
                 transition={{ delay: 0.42, duration: 0.5 }}
                 className="mt-9 px-7"
               >
-                <Link to="/contact" className="btn-primary w-full justify-center">
+                <button
+                  type="button"
+                  onClick={() => { setOpen(false); openSchedule() }}
+                  className="btn-primary w-full justify-center"
+                >
                   Book a consultation
-                </Link>
+                </button>
                 <div className="mt-6 flex flex-col gap-3">
                   <a href={firm.phoneHref} className="flex items-center gap-3 font-sans text-[0.92rem] text-ink-soft transition-colors hover:text-emerald">
                     <Icon name="phone" size={17} className="text-gold" /> {firm.phone}
