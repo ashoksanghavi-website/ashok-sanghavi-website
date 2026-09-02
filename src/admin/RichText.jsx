@@ -50,19 +50,42 @@ export default function RichText({ value, onChange }) {
     }
   }
 
+  // Toolbar mousedown is prevented, so the editor keeps focus + selection and
+  // commands apply to it directly. Image insert is async (media picker), so we
+  // stash the caret first and restore it when the chosen image comes back.
   const exec = (tool) => {
-    ref.current?.focus()
-    restoreSelection()
-    if (tool.cmd) document.execCommand(tool.cmd, false, null)
-    else if (tool.block) document.execCommand('formatBlock', false, tool.block)
-    else if (tool.action === 'link') {
-      const url = prompt('Link URL (include https://)')
-      if (url) document.execCommand('createLink', false, url)
-    } else if (tool.action === 'image') {
+    if (tool.action === 'image') {
+      saveSelection()
       setPicker(true)
       return
     }
+    if (tool.action === 'link') {
+      const url = prompt('Link URL (include https://)')
+      if (url) document.execCommand('createLink', false, url)
+    } else if (tool.cmd) {
+      document.execCommand(tool.cmd, false, null)
+    } else if (tool.block) {
+      document.execCommand('formatBlock', false, tool.block)
+    }
     sync()
+  }
+
+  // After a heading or quote, Enter should drop to normal body text (not keep
+  // extending the heading, which is the confusing contentEditable default).
+  const onKeyDown = (e) => {
+    if (e.key !== 'Enter' || e.shiftKey) return
+    const sel = window.getSelection()
+    if (!sel || !sel.rangeCount) return
+    let node = sel.anchorNode
+    while (node && node !== ref.current && !(node.nodeType === 1 && /^(H1|H2|H3|BLOCKQUOTE)$/.test(node.tagName))) {
+      node = node.parentNode
+    }
+    if (node && node !== ref.current) {
+      e.preventDefault()
+      document.execCommand('insertParagraph')
+      document.execCommand('formatBlock', false, 'P')
+      sync()
+    }
   }
 
   const insertImage = (url) => {
@@ -95,6 +118,7 @@ export default function RichText({ value, onChange }) {
         suppressContentEditableWarning
         onInput={sync}
         onBlur={sync}
+        onKeyDown={onKeyDown}
         onKeyUp={saveSelection}
         onMouseUp={saveSelection}
         className="article-html min-h-[320px] px-4 py-3 text-[0.95rem] outline-none"
