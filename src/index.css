@@ -1,0 +1,308 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   Private Wealth — global design system
+   ============================================================ */
+:root {
+  --ivory: #fbf8f1;
+  --cream: #f5f0e6;
+  --emerald: #14563b;
+  --emerald-deep: #0e3a28;
+  --sage: #6ba98a;
+  --gold: #c6a253;
+  --gold-light: #d9be7e;
+  --ink: #26362e;
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    scroll-behavior: auto; /* Lenis owns scrolling */
+  }
+  body {
+    background-color: var(--ivory);
+    color: var(--ink);
+    font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    font-size: 1.0625rem; /* 17px base */
+    line-height: 1.7;
+    font-weight: 400;
+    overflow-x: hidden;
+  }
+  ::selection {
+    background: rgba(198, 162, 83, 0.28);
+    color: var(--emerald-deep);
+  }
+  h1, h2, h3, h4 {
+    font-family: 'Playfair Display', Georgia, Cambria, 'Times New Roman', serif;
+    font-weight: 600;
+    color: var(--emerald);
+    letter-spacing: -0.005em;
+    line-height: 1.1;
+  }
+  /* Lenis */
+  html.lenis, html.lenis body { height: auto; }
+  .lenis.lenis-smooth { scroll-behavior: auto !important; }
+  .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+  .lenis.lenis-stopped { overflow: hidden; }
+}
+
+@layer components {
+  /* Small gold eyebrow label — deeper bronze-gold for legible small caps on light */
+  .eyebrow {
+    @apply inline-flex items-center gap-3 font-sans uppercase;
+    color: #9a7a30;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.28em;
+  }
+  .eyebrow::before {
+    content: '';
+    width: 1.75rem;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold));
+    display: inline-block;
+  }
+  .eyebrow--center::before { display: none; }
+
+  /* Buttons — premium hover (lift + sheen sweep) and click (press) states */
+  .btn {
+    @apply relative inline-flex items-center justify-center gap-2 overflow-hidden font-sans font-semibold rounded-full;
+    font-size: 0.94rem;
+    letter-spacing: 0.01em;
+    transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+                box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+                background-color 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+                border-color 0.45s ease, color 0.45s ease;
+  }
+  /* light sweep that glides across on hover */
+  .btn::after {
+    content: '';
+    position: absolute;
+    top: 0; left: -120%;
+    width: 60%; height: 100%;
+    background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.22), transparent);
+    transform: skewX(-18deg);
+    transition: left 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    pointer-events: none;
+  }
+  .btn:hover::after { left: 130%; }
+  .btn:active { transform: translateY(0) scale(0.97); transition-duration: 0.1s; }
+  .btn > * { position: relative; z-index: 1; }
+
+  .btn-primary {
+    @apply btn text-ivory px-7 py-3.5;
+    background: var(--emerald);
+    box-shadow: 0 14px 34px -16px rgba(14, 58, 40, 0.7);
+  }
+  .btn-primary:hover {
+    background: var(--emerald-deep);
+    transform: translateY(-3px);
+    box-shadow: 0 24px 48px -18px rgba(14, 58, 40, 0.85);
+  }
+  .btn-ghost {
+    @apply btn px-7 py-3.5 border;
+    color: var(--emerald);
+    border-color: rgba(20, 86, 59, 0.28);
+    background: transparent;
+  }
+  .btn-ghost:hover {
+    border-color: var(--gold);
+    color: var(--emerald-deep);
+    background: rgba(198, 162, 83, 0.08);
+    transform: translateY(-3px);
+  }
+  .btn-gold {
+    @apply btn px-7 py-3.5;
+    background: var(--gold);
+    color: var(--emerald-deep);
+    box-shadow: 0 14px 34px -16px rgba(166, 134, 59, 0.8);
+  }
+  .btn-gold:hover {
+    background: var(--gold-light);
+    transform: translateY(-3px);
+    box-shadow: 0 24px 46px -18px rgba(166, 134, 59, 0.9);
+  }
+
+  /* Gold underline draw for text links */
+  .link-gold {
+    position: relative;
+    color: var(--emerald);
+    font-weight: 600;
+  }
+  .link-gold::after {
+    content: '';
+    position: absolute;
+    left: 0; bottom: -3px;
+    width: 100%; height: 1.5px;
+    background: var(--gold);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .link-gold:hover::after { transform: scaleX(1); }
+
+  .rule-gold {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(198, 162, 83, 0.9), transparent);
+    border: 0;
+  }
+
+  /* Header nav item with gold underline draw */
+  .nav-item {
+    position: relative;
+    transition: color 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .nav-item::after {
+    content: '';
+    position: absolute;
+    left: 0; bottom: -6px;
+    width: 100%; height: 1.5px;
+    background: var(--gold);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .nav-item:hover::after,
+  .nav-item.active::after { transform: scaleX(1); }
+
+  /* Light header over the cinematic hero: shadow keeps text legible on any frame */
+  .header-light a:not(.btn),
+  .header-light .nav-item,
+  .header-light span {
+    text-shadow: 0 1px 16px rgba(14, 58, 40, 0.5);
+  }
+
+  .footer-head {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.24em;
+    color: var(--gold-light);
+  }
+  .footer-link {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 0.92rem;
+    color: rgba(207, 225, 213, 0.9);
+    display: inline-block;
+    transition: color 0.35s ease, transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .footer-link:hover { color: var(--gold-light); transform: translateX(4px); }
+
+  /* Service card */
+  .service-card {
+    background: var(--ivory);
+    border: 1px solid rgba(20, 86, 59, 0.08);
+    border-radius: 1.15rem;
+    padding: 1.75rem;
+    transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+                box-shadow 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+                border-color 0.55s ease;
+  }
+  .service-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 30px 60px -30px rgba(14, 58, 40, 0.35);
+    border-color: rgba(198, 162, 83, 0.4);
+  }
+  .service-underline {
+    display: block;
+    margin-top: 0.9rem;
+    height: 2px;
+    width: 2.5rem;
+    background: var(--gold);
+    transform: scaleX(0.5);
+    transform-origin: left;
+    opacity: 0.5;
+    transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.6s ease, width 0.6s ease;
+  }
+  .service-card:hover .service-underline {
+    transform: scaleX(1);
+    width: 4.5rem;
+    opacity: 1;
+  }
+
+  /* Image service tile — isolated layer + baseline scale avoids the repaint
+     "break"/flicker that combined transforms can cause on hover */
+  .service-tile {
+    isolation: isolate;
+    will-change: transform;
+    transform: translateZ(0);
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+                box-shadow 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+                border-color 0.4s ease;
+    backface-visibility: hidden;
+  }
+  .service-tile:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 30px 60px -30px rgba(14, 58, 40, 0.38);
+    border-color: rgba(198, 162, 83, 0.45);
+  }
+  .service-tile-img {
+    transform: scale(1.02);
+    transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+    backface-visibility: hidden;
+  }
+  .service-tile:hover .service-tile-img { transform: scale(1.08); }
+  .service-tile:hover .service-underline { transform: scaleX(1); width: 4.5rem; opacity: 1; }
+}
+
+@layer utilities {
+  .container-lux { @apply mx-auto px-6 sm:px-8; max-width: 1200px; }
+  .container-wide { @apply mx-auto px-6 sm:px-8; max-width: 1360px; }
+  .text-balance { text-wrap: balance; }
+  .text-pretty { text-wrap: pretty; }
+}
+
+/* Scroll reveal is now handled by Framer Motion in <Reveal> (src/components/
+   Reveal.jsx) — no CSS blur. This block intentionally left minimal. */
+
+/* Marquee (testimonials) */
+.marquee {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+}
+.marquee-track {
+  display: flex;
+  gap: var(--gap, 1.25rem);
+  width: max-content;
+  animation: marquee var(--duration, 46s) linear infinite;
+  animation-direction: var(--dir, normal);
+}
+.marquee:hover .marquee-track { animation-play-state: paused; }
+@keyframes marquee {
+  to { transform: translateX(calc(-50% - var(--gap, 1.25rem) / 2)); }
+}
+
+/* Falling leaves over the hero poster. Each leaf varies via CSS vars set
+   inline: --dx drift, --spin rotation, --o peak opacity. */
+@keyframes leafFall {
+  0%   { transform: translate3d(0, -12vh, 0) rotate(0deg); opacity: 0; }
+  8%   { opacity: var(--o, 0.85); }
+  50%  { transform: translate3d(var(--dx, 40px), 52vh, 0) rotate(calc(var(--spin, 360deg) * 0.55)); }
+  92%  { opacity: var(--o, 0.85); }
+  100% { transform: translate3d(calc(var(--dx, 40px) * -0.7), 114vh, 0) rotate(var(--spin, 360deg)); opacity: 0; }
+}
+.leaf {
+  position: absolute;
+  top: 0;
+  will-change: transform, opacity;
+  animation-name: leafFall;
+  animation-timing-function: cubic-bezier(0.45, 0.05, 0.55, 0.95);
+  animation-iteration-count: infinite;
+}
+
+/* Global film grain overlay */
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 60;
+  opacity: 0.05;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
