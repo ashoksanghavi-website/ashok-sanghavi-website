@@ -21,13 +21,23 @@ export function useSmoothScroll() {
     // native scroll, so all animations keep working. Also let ScrollTrigger
     // measure regardless.
     const isTouch = window.matchMedia('(pointer: coarse)').matches
+    const isPhone = window.matchMedia('(max-width: 767px)').matches
     const refreshAll = () => ScrollTrigger.refresh()
     window.addEventListener('load', refreshAll)
     const tt = setTimeout(refreshAll, 600)
     if (isTouch) {
+      // Tablets run the canvas scroll-scrub. iOS throttles scroll events during
+      // momentum scrolling, which makes the scrub stutter; normalizeScroll lets
+      // ScrollTrigger drive touch scrolling itself so the frames advance smoothly.
+      let normalized = false
+      if (!isPhone) {
+        ScrollTrigger.normalizeScroll(true)
+        normalized = true
+      }
       return () => {
         window.removeEventListener('load', refreshAll)
         clearTimeout(tt)
+        if (normalized) ScrollTrigger.normalizeScroll(false)
       }
     }
 

@@ -14,7 +14,11 @@ const POSTER = '/hero/poster-v2.jpg'
 // drawn to canvas are instant, so the scrub runs at a true 60fps with no
 // decode stalls or reload glitches.
 const FRAME_COUNT = 144
-const framePath = (i) => `/hero/seq-hd/f${String(i).padStart(3, '0')}.webp`
+// Tablets (touch) load a lighter 720p frame set so decoding each frame during
+// the scrub is cheap enough to stay smooth; desktops get the full-HD frames.
+const FRAME_DIR =
+  typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches ? 'seq-md' : 'seq-hd'
+const framePath = (i) => `/hero/${FRAME_DIR}/f${String(i).padStart(3, '0')}.webp`
 
 // Autumn falling-leaves that drift over the opening poster. Each leaf's colour,
 // drift, spin and timing is randomised once on mount.
