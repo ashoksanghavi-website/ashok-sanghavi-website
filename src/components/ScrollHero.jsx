@@ -13,7 +13,7 @@ const POSTER = '/hero/poster-v2.jpg'
 // drawn to canvas are instant, so the scrub runs at a true 60fps with no
 // decode stalls or reload glitches.
 const FRAME_COUNT = 144
-const framePath = (i) => `/hero/seq/f${String(i).padStart(3, '0')}.webp`
+const framePath = (i) => `/hero/seq-hd/f${String(i).padStart(3, '0')}.webp`
 
 // Autumn falling-leaves that drift over the opening poster. Each leaf's colour,
 // drift, spin and timing is randomised once on mount.
@@ -282,8 +282,8 @@ export default function ScrollHero() {
   return (
     <section id="scroll-hero" ref={wrapRef} style={{ height: `${scrollVh}vh` }} className="relative">
       <div ref={stageRef} className="sticky top-0 h-dvh w-full overflow-hidden bg-emerald-deep">
-        {/* Scroll-scrubbed image sequence (desktop). Drawn frame-by-frame in the
-            rAF loop; the grade masks the 720p softness like it did for the video. */}
+        {/* Scroll-scrubbed image sequence (desktop). Full-HD 1920x1080 frames
+            drawn frame-by-frame in the rAF loop for a crisp, cinematic scrub. */}
         <canvas
           ref={canvasRef}
           className="absolute inset-0 h-full w-full"
