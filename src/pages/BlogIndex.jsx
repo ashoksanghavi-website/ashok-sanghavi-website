@@ -6,13 +6,15 @@ import CTASection from '../components/CTASection'
 import Reveal from '../components/Reveal'
 import ImageSlot from '../components/ImageSlot'
 import Icon from '../components/Icons'
-import { posts } from '../lib/content'
+import { usePosts, coverSrc } from '../lib/usePosts'
 
 export function formatDate(d) {
+  if (!d) return ''
   return new Date(d).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
 }
 
 export default function BlogIndex() {
+  const { posts } = usePosts()
   const [featured, ...rest] = posts
 
   return (
@@ -37,7 +39,7 @@ export default function BlogIndex() {
               className="group grid items-center gap-10 lg:grid-cols-2 lg:gap-16"
             >
               <ImageSlot
-                src={`/media/blog-${featured.slug}.jpg`}
+                src={coverSrc(featured)}
                 label="Featured image"
                 icon="file"
                 ratio="16 / 10"
@@ -79,7 +81,7 @@ export default function BlogIndex() {
                   to={`/blog/${p.slug}`}
                   className="group flex h-full flex-col overflow-hidden rounded-2xl border border-gold/20 bg-ivory transition-all duration-500 hover:-translate-y-1.5 hover:shadow-lift"
                 >
-                  <ImageSlot src={`/media/blog-${p.slug}.jpg`} label="Article image" icon="file" ratio="16 / 10" rounded="rounded-none" />
+                  <ImageSlot src={coverSrc(p)} label="Article image" icon="file" ratio="16 / 10" rounded="rounded-none" />
                   <div className="flex flex-1 flex-col p-6">
                     <span className="eyebrow">{p.category}</span>
                     <h3 className="mt-3 font-display text-[1.35rem] leading-snug text-emerald">{p.title}</h3>

@@ -6,7 +6,7 @@ import Breadcrumb from '../components/Breadcrumb'
 import Reveal from '../components/Reveal'
 import ImageSlot from '../components/ImageSlot'
 import Icon from '../components/Icons'
-import { posts } from '../lib/content'
+import { usePost, usePosts, coverSrc } from '../lib/usePosts'
 import { formatDate } from './BlogIndex'
 
 function Block({ block }) {
@@ -23,11 +23,60 @@ function Block({ block }) {
   return <p className="mt-6 text-body text-ink-soft">{block.text}</p>
 }
 
+// Body comes in two shapes: bundled demo posts use an array of typed blocks;
+// admin-authored posts store a single string (plain text or HTML). Render both.
+function PostBody({ body }) {
+  if (Array.isArray(body)) {
+    return (
+      <>
+        {body.map((block, i) => (
+          <Reveal key={i} delay={0}>
+            <Block block={block} />
+          </Reveal>
+        ))}
+      </>
+    )
+  }
+
+  const text = String(body || '').trim()
+  if (!text) return null
+
+  const looksLikeHtml = /<\/?[a-z][\s\S]*>/i.test(text)
+  if (looksLikeHtml) {
+    return <div className="article-html" dangerouslySetInnerHTML={{ __html: text }} />
+  }
+
+  // Plain text: blank lines separate paragraphs.
+  const paragraphs = text.split(/\n{2,}/).map((p) => p.trim()).filter(Boolean)
+  return (
+    <>
+      {paragraphs.map((p, i) => (
+        <Reveal key={i} delay={0}>
+          <p className="mt-6 text-body text-ink-soft">{p}</p>
+        </Reveal>
+      ))}
+    </>
+  )
+}
+
 export default function BlogArticle() {
   const { slug } = useParams()
-  const post = posts.find((p) => p.slug === slug)
-  if (!post) return <Navigate to="/blog" replace />
-  const related = posts.filter((p) => p.slug !== slug).slice(0, 3)
+  const { post, loading, notFound } = usePost(slug)
+  const { posts: all } = usePosts()
+
+  if (notFound) return <Navigate to="/blog" replace />
+
+  if (loading || !post) {
+    return (
+      <PageTransition>
+        <div className="flex min-h-[60vh] items-center justify-center bg-ivory">
+          <span className="font-sans text-[0.8rem] uppercase tracking-[0.22em] text-ink-muted">Loading…</span>
+        </div>
+      </PageTransition>
+    )
+  }
+
+  const related = all.filter((p) => p.slug !== slug).slice(0, 3)
 
   return (
     <PageTransition>
@@ -58,7 +107,7 @@ export default function BlogArticle() {
                 {formatDate(post.date)}
               </span>
               <span className="h-1 w-1 rounded-full bg-gold/60" />
-              <span>Ashok Sanghavi</span>
+              <span>{post.author || 'Ashok Sanghavi'}</span>
             </div>
           </Reveal>
         </div>
@@ -69,14 +118,10 @@ export default function BlogArticle() {
       <article className="bg-ivory py-16 sm:py-20">
         <div className="container-lux">
           <Reveal>
-            <ImageSlot src={`/media/blog-${post.slug}.jpg`} label="Article image" icon="file" ratio="16 / 9" framed className="mx-auto max-w-3xl" />
+            <ImageSlot src={coverSrc(post)} label="Article image" icon="file" ratio="16 / 9" framed className="mx-auto max-w-3xl" />
           </Reveal>
           <div className="mx-auto mt-16 max-w-prose">
-            {post.body.map((block, i) => (
-              <Reveal key={i} delay={0}>
-                <Block block={block} />
-              </Reveal>
-            ))}
+            <PostBody body={post.body} />
           </div>
 
           {/* share / back */}
@@ -93,31 +138,33 @@ export default function BlogArticle() {
       </article>
 
       {/* Related */}
-      <section className="bg-cream py-20 sm:py-24">
-        <div className="container-lux">
-          <Reveal>
-            <h2 className="font-display text-[1.7rem] text-emerald sm:text-[2rem]">Related reading</h2>
-          </Reveal>
-          <div className="mt-8 grid gap-6 md:grid-cols-3">
-            {related.map((p, i) => (
-              <Reveal key={p.slug} delay={(i % 3) * 90}>
-                <Link
-                  to={`/blog/${p.slug}`}
-                  className="group flex h-full flex-col rounded-2xl border border-gold/20 bg-ivory p-6 transition-all duration-500 hover:-translate-y-1.5 hover:shadow-lift"
-                >
-                  <span className="eyebrow">{p.category}</span>
-                  <h3 className="mt-3 font-display text-[1.25rem] leading-snug text-emerald">{p.title}</h3>
-                  <p className="mt-3 flex-1 text-[0.94rem] leading-relaxed text-ink-soft">{p.excerpt}</p>
-                  <span className="mt-4 inline-flex items-center gap-2 font-sans text-[0.84rem] font-semibold text-emerald">
-                    Read
-                    <Icon name="arrow" size={15} className="text-gold transition-transform duration-500 group-hover:translate-x-1" />
-                  </span>
-                </Link>
-              </Reveal>
-            ))}
+      {related.length > 0 && (
+        <section className="bg-cream py-20 sm:py-24">
+          <div className="container-lux">
+            <Reveal>
+              <h2 className="font-display text-[1.7rem] text-emerald sm:text-[2rem]">Related reading</h2>
+            </Reveal>
+            <div className="mt-8 grid gap-6 md:grid-cols-3">
+              {related.map((p, i) => (
+                <Reveal key={p.slug} delay={(i % 3) * 90}>
+                  <Link
+                    to={`/blog/${p.slug}`}
+                    className="group flex h-full flex-col rounded-2xl border border-gold/20 bg-ivory p-6 transition-all duration-500 hover:-translate-y-1.5 hover:shadow-lift"
+                  >
+                    <span className="eyebrow">{p.category}</span>
+                    <h3 className="mt-3 font-display text-[1.25rem] leading-snug text-emerald">{p.title}</h3>
+                    <p className="mt-3 flex-1 text-[0.94rem] leading-relaxed text-ink-soft">{p.excerpt}</p>
+                    <span className="mt-4 inline-flex items-center gap-2 font-sans text-[0.84rem] font-semibold text-emerald">
+                      Read
+                      <Icon name="arrow" size={15} className="text-gold transition-transform duration-500 group-hover:translate-x-1" />
+                    </span>
+                  </Link>
+                </Reveal>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       <CTASection
         eyebrow="Your turn"
