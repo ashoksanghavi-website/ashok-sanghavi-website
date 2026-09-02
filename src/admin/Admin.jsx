@@ -255,7 +255,7 @@ function PostEditor() {
 function Inbox() {
   const [items, setItems] = useState(null)
   const [err, setErr] = useState('')
-  const load = useCallback(() => api.get('/api/submissions').then(setItems).catch((e) => setErr(e.message)), [])
+  const load = useCallback(() => { api.get('/api/submissions').then(setItems).catch((e) => setErr(e.message)) }, [])
   useEffect(load, [load])
 
   async function mark(id, status) { await api.patch('/api/submissions', { id, status }); load() }
