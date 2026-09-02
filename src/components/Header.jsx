@@ -117,7 +117,7 @@ export default function Header() {
       >
         {/* Utility bar — a slim premium top row that collapses on scroll */}
         <div
-          className="hidden overflow-hidden border-b transition-all duration-500 lg:block"
+          className="hidden overflow-hidden border-b transition-all duration-500 xl:block"
           style={{
             height: compact ? 0 : 38,
             opacity: compact ? 0 : 1,
@@ -152,7 +152,7 @@ export default function Header() {
           <Wordmark compact={compact} light={light} />
 
           {/* Desktop nav */}
-          <nav className="hidden lg:flex items-center gap-8">
+          <nav className="hidden xl:flex items-center gap-8">
             {nav.map((item) =>
               item.children ? (
                 <div
@@ -252,7 +252,7 @@ export default function Header() {
             )}
           </nav>
 
-          <div className="hidden items-center gap-6 lg:flex">
+          <div className="hidden items-center gap-6 xl:flex">
             <span
               className="h-7 w-px"
               style={{ background: light ? 'rgba(217,190,126,0.4)' : 'rgba(198,162,83,0.35)' }}
@@ -264,7 +264,7 @@ export default function Header() {
 
           {/* Mobile toggle */}
           <button
-            className={`grid h-12 w-12 place-items-center rounded-full border transition-all duration-500 lg:hidden ${
+            className={`grid h-12 w-12 place-items-center rounded-full border transition-all duration-500 xl:hidden ${
               light
                 ? 'border-gold-light/50 text-ivory hover:bg-ivory/10'
                 : 'border-gold/45 text-emerald hover:border-gold hover:bg-gold/10'
@@ -301,7 +301,7 @@ export default function Header() {
       {/* Mobile slide-in menu — premium drawer with collapsible sections */}
       <AnimatePresence>
         {open && (
-          <div className="fixed inset-0 z-40 lg:hidden">
+          <div className="fixed inset-0 z-40 xl:hidden">
             {/* Scrim */}
             <motion.button
               initial={{ opacity: 0 }}

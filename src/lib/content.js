@@ -298,7 +298,11 @@ export const partners = [
   { label: 'ABS', href: 'https://www.absgo.com/' },
 ]
 
-// -------- Reviews (DEMO — replace with real client testimonials) --------
+// -------- Reviews --------
+// Real 5-star Google reviews. Each: { quote, name, role, stars: 5, image }.
+// `image` is an optional profile photo URL (e.g. an /api/media/… upload or a
+// /media/reviews/<name>.jpg file); without it the card shows the name initial.
+// TODO: replace the demo entries below with the client's real reviews + photos.
 export const reviews = [
   {
     quote:
