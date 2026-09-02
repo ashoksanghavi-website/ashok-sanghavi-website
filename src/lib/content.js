@@ -299,51 +299,64 @@ export const partners = [
 ]
 
 // -------- Reviews --------
-// Real 5-star Google reviews. Each: { quote, name, role, stars: 5, image }.
-// `image` is an optional profile photo URL (e.g. an /api/media/… upload or a
-// /media/reviews/<name>.jpg file); without it the card shows the name initial.
-// TODO: replace the demo entries below with the client's real reviews + photos.
+// Real 5-star Google reviews for the firm. Each: { quote, name, role, stars, image }.
+// `image` is an optional profile-photo URL; without it the card shows the name's
+// initial in a monogram avatar.
 export const reviews = [
   {
     quote:
-      'Ashok took the time to understand our whole situation before recommending anything. For the first time, our finances feel like one clear plan.',
-    name: 'James and Carol M.',
-    role: 'Retired, Elkhart',
+      'Ashok has been our financial planner for over a decade. His goal is to give his clients peace of mind and that is exactly what he accomplishes. He has a measured approach and is always available for questions or consultations. We have been thrilled with his attention to detail, simplicity of explanation, and with knowing our financials are in excellent shape and growing. Ashok’s financial plans ensure long-term success, not just short-term windfalls. Recommend 10/10.',
+    name: 'Vidhi S.',
+    role: 'Client of over a decade',
     stars: 5,
   },
   {
     quote:
-      'The tax strategy alone paid for itself many times over. But it is the trust that keeps us here, year after year.',
-    name: 'Robert D.',
-    role: 'Business owner',
+      'Working with Ashok Sanghavi has been a great experience. He is knowledgeable, responsive, and truly takes the time to understand my financial goals. I appreciate how clearly he explains investment strategies and always keeps my best interests in mind. I feel confident about my financial future thanks to his guidance and would highly recommend him to anyone looking for trustworthy and professional advice.',
+    name: 'Karan Bhagchandani',
+    role: 'Investment planning',
     stars: 5,
   },
   {
     quote:
-      'We came in worried about retirement and left with genuine peace of mind. That is exactly what the sign promises.',
-    name: 'Susan T.',
-    role: 'Recently retired',
+      'Ashok Sanghavi and his team have been a great partner in our financial planning journey. They are knowledgeable, transparent, and take the time to explain every option clearly. We always feel confident making decisions with their guidance.',
+    name: 'Ankith Chandra',
+    role: 'Local Guide',
     stars: 5,
   },
   {
     quote:
-      'Honest, patient and genuinely on our side. In over twenty years we have never once felt like just a number.',
-    name: 'Michael and Anne P.',
-    role: 'Clients since 2003',
+      'Global Financial Group is a great firm and have helped my family in financial planning. Ashok Sanghavi is a very knowledgeable and trustworthy person. Exceptional service. Neel is a great person and quickly responds to any queries you may have. Keep it up.',
+    name: 'Sheel Sheth',
+    role: 'Financial planning',
     stars: 5,
   },
   {
     quote:
-      'He explained everything in plain language until it finally made sense. Now I actually understand my own money.',
-    name: 'David L.',
-    role: 'Physician',
+      'We are incredibly grateful for the support and guidance that Ashok Sanghavi provided during one of the most difficult times in our lives. After my father passed away recently, Ashok was compassionate, patient, and truly went above and beyond to help us navigate everything. His professionalism and genuine care made a heavy situation feel much more manageable. We could not have asked for better support and highly recommend him to anyone looking for someone knowledgeable and kind.',
+    name: 'Laura Deluca',
+    role: 'Estate and legacy planning',
     stars: 5,
   },
   {
     quote:
-      'The whole team treats our family like their own. That is rare, and we do not take it for granted.',
-    name: 'Priya S.',
-    role: 'Family client',
+      'Working with Ashok Sanghavi and his assistant Neel has been an awesome experience. Financial planning is complex and very necessary. They listen first and then help customize a plan that meets your needs today and into the future.',
+    name: 'Krishna Jasani',
+    role: 'Financial planning',
+    stars: 5,
+  },
+  {
+    quote:
+      'If you need financial planning and advice on wealth management, this is the firm to go to. They give good advice, help manage for your future, plan out for kids and build wealth. They have good financial firms they work with and policies that are suitable for various stages in life.',
+    name: 'Abhi G',
+    role: 'Wealth management',
+    stars: 5,
+  },
+  {
+    quote:
+      'I truly appreciate his dedication to client satisfaction and would highly recommend Mr. Ashok Sanghavi to anyone looking for reliable and trustworthy guidance in life insurance.',
+    name: 'Sukhram Bishnoi',
+    role: 'Life insurance',
     stars: 5,
   },
 ]
