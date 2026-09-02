@@ -7,7 +7,6 @@ import Reveal from '../components/Reveal'
 import ImageSlot from '../components/ImageSlot'
 import Icon from '../components/Icons'
 import { services } from '../lib/site'
-import { serviceDetails } from '../lib/content'
 import { useSiteContent } from '../lib/useSiteContent'
 
 export default function ServicesHub() {
@@ -79,7 +78,7 @@ export default function ServicesHub() {
                   <div className="flex flex-1 flex-col p-5">
                     <h3 className="font-display text-[1.2rem] leading-snug text-emerald">{s.title}</h3>
                     <span className="service-underline" />
-                    <p className="mt-3 flex-1 text-[0.9rem] leading-relaxed text-ink-soft">{serviceDetails[s.slug].tagline}</p>
+                    <p className="mt-3 flex-1 text-[0.9rem] leading-relaxed text-ink-soft">{t(`service.${s.slug}.tagline`)}</p>
                     <span className="mt-4 inline-flex items-center gap-1.5 font-sans text-[0.8rem] font-semibold text-emerald">
                       Explore
                       <Icon name="arrow" size={15} className="text-gold transition-transform duration-500 group-hover:translate-x-1" />

@@ -18,13 +18,21 @@ export default function ServiceDetail() {
 
   const others = services.filter((s) => s.slug !== slug).slice(0, 4)
 
+  // Editable content (falls back to the built-in detail). Lists are stored as
+  // one item per line in the admin.
+  const lines = (s) => String(s || '').split('\n').map((x) => x.trim()).filter(Boolean)
+  const tagline = t(`service.${slug}.tagline`)
+  const forWho = lines(t(`service.${slug}.forWho`))
+  const approach = lines(t(`service.${slug}.approach`))
+  const benefits = lines(t(`service.${slug}.benefits`))
+
   return (
     <PageTransition>
-      <Seo title={service.title} description={detail.tagline} />
+      <Seo title={service.title} description={tagline} />
       <PageHero
         eyebrow="Services"
         title={service.title}
-        intro={detail.tagline}
+        intro={tagline}
         crumbs={[{ label: 'Home', to: '/' }, { label: 'Services', to: '/services' }, { label: service.title }]}
         image={`/media/service-${slug}.jpg`}
         imageLabel={service.title}
@@ -55,7 +63,7 @@ export default function ServiceDetail() {
               Planning that fits your situation.
             </h2>
             <ul className="mt-8 space-y-4">
-              {detail.forWho.map((f) => (
+              {forWho.map((f) => (
                 <li key={f} className="flex items-start gap-3">
                   <span className="mt-1 text-gold">
                     <Icon name="check" size={20} strokeWidth={2} />
@@ -71,7 +79,7 @@ export default function ServiceDetail() {
               A calm, deliberate process.
             </h2>
             <ol className="mt-8 space-y-6">
-              {detail.approach.map((a, i) => (
+              {approach.map((a, i) => (
                 <li key={a} className="flex items-start gap-5">
                   <span className="font-display text-2xl leading-none text-gold/70">{String(i + 1).padStart(2, '0')}</span>
                   <span className="text-body text-ink-soft">{a}</span>
@@ -92,7 +100,7 @@ export default function ServiceDetail() {
             </h2>
           </Reveal>
           <div className="mt-12 grid gap-5 sm:grid-cols-3">
-            {detail.benefits.map((b, i) => (
+            {benefits.map((b, i) => (
               <Reveal key={b} delay={i * 90}>
                 <div className="h-full rounded-2xl border border-gold/20 bg-cream p-7">
                   <span className="grid h-10 w-10 place-items-center rounded-full bg-emerald/10 text-emerald">

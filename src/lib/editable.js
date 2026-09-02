@@ -169,10 +169,20 @@ export const contentSchema = [
           T('services.grid.heading', 'Heading', 'Explore each discipline in detail.'),
         ],
       },
-      {
-        label: 'Service descriptions (shown on each service page)',
-        fields: services.map((s) => M(`service.${s.slug}.overview`, s.title, serviceDetails[s.slug].overview)),
-      },
+      // One group per individual service page — its full content.
+      ...services.map((s) => {
+        const d = serviceDetails[s.slug]
+        return {
+          label: `Service: ${s.title}`,
+          fields: [
+            T(`service.${s.slug}.tagline`, 'Tagline', d.tagline),
+            M(`service.${s.slug}.overview`, 'Overview', d.overview),
+            M(`service.${s.slug}.forWho`, 'Who it is for (one per line)', d.forWho.join('\n')),
+            M(`service.${s.slug}.approach`, 'Our approach (one per line)', d.approach.join('\n')),
+            M(`service.${s.slug}.benefits`, 'Key benefits (one per line)', d.benefits.join('\n')),
+          ],
+        }
+      }),
       {
         label: 'Closing call to action',
         fields: [
