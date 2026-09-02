@@ -3,6 +3,7 @@ import { Routes, Route, Link, useNavigate, useParams, useLocation, Navigate } fr
 import { api } from './api'
 import RichText from './RichText'
 import { MediaManager, MediaPickerModal } from './Media'
+import PagesEditor from './PagesEditor'
 
 const slugify = (s) =>
   String(s).toLowerCase().trim().replace(/[^\w\s-]/g, '').replace(/[\s_-]+/g, '-').replace(/^-+|-+$/g, '')
@@ -78,6 +79,7 @@ function Shell({ email, onLogout, children }) {
           <div className="flex items-center gap-4">
             <img src="/logo.png" alt="" className="h-8 w-8 rounded-full" />
             <nav className="flex items-center gap-1">
+              {nav('/admin/pages', 'Pages')}
               {nav('/admin/posts', 'Blog')}
               {nav('/admin/media', 'Media')}
               {nav('/admin/inbox', 'Inbox')}
@@ -361,7 +363,8 @@ export default function Admin() {
   return (
     <Shell email={auth.user.email} onLogout={logout}>
       <Routes>
-        <Route index element={<Navigate to="/admin/posts" replace />} />
+        <Route index element={<Navigate to="/admin/pages" replace />} />
+        <Route path="pages" element={<PagesEditor />} />
         <Route path="posts" element={<PostsList />} />
         <Route path="posts/new" element={<PostEditor />} />
         <Route path="posts/:slug" element={<PostEditor />} />

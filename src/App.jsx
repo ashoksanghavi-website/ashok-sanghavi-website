@@ -7,6 +7,8 @@ import Footer from './components/Footer'
 import GetInTouchPopup from './components/GetInTouchPopup'
 import CookieConsent from './components/CookieConsent'
 import { ScheduleProvider } from './components/ScheduleModal'
+import ErrorBoundary from './components/ErrorBoundary'
+import { SiteContentProvider } from './lib/useSiteContent'
 import Home from './pages/Home'
 import About from './pages/About'
 import CoreBeliefs from './pages/CoreBeliefs'
@@ -41,13 +43,17 @@ export default function App() {
   // The admin panel is its own app — no marketing chrome (header/footer/popups).
   if (location.pathname.startsWith('/admin')) {
     return (
-      <Routes location={location}>
-        <Route path="/admin/*" element={<Admin />} />
-      </Routes>
+      <ErrorBoundary resetKey={location.pathname}>
+        <Routes location={location}>
+          <Route path="/admin/*" element={<Admin />} />
+        </Routes>
+      </ErrorBoundary>
     )
   }
 
   return (
+    <ErrorBoundary resetKey={location.pathname}>
+    <SiteContentProvider>
     <ScheduleProvider>
       <div className="grain-overlay" aria-hidden="true" />
       <Header />
@@ -74,5 +80,7 @@ export default function App() {
       <GetInTouchPopup />
       <CookieConsent />
     </ScheduleProvider>
+    </SiteContentProvider>
+    </ErrorBoundary>
   )
 }

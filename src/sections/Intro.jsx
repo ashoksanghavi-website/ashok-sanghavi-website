@@ -2,8 +2,10 @@ import { Link } from 'react-router-dom'
 import Reveal from '../components/Reveal'
 import Icon from '../components/Icons'
 import { CREDENTIALS, Reg } from '../components/Cred'
+import { useSiteContent } from '../lib/useSiteContent'
 
 export default function Intro() {
+  const { t, img } = useSiteContent()
   return (
     <section id="intro" className="relative overflow-hidden bg-ivory py-24 sm:py-32">
       <div className="container-lux">
@@ -15,7 +17,7 @@ export default function Intro() {
               <div className="pointer-events-none absolute -inset-3 rounded-[1.6rem] shadow-lift" />
               <div className="relative overflow-hidden rounded-[1.3rem] bg-cream" style={{ aspectRatio: '4 / 3' }}>
                 <img
-                  src="/family.webp"
+                  src={img('home.intro.image')}
                   alt="Ashok Sanghavi with family"
                   className="absolute inset-0 h-full w-full object-cover object-top"
                   onError={(e) => {
@@ -52,11 +54,11 @@ export default function Intro() {
           {/* Copy */}
           <div>
             <Reveal>
-              <p className="eyebrow">The advisor</p>
+              <p className="eyebrow">{t('home.intro.eyebrow')}</p>
             </Reveal>
             <Reveal delay={80}>
               <h2 className="mt-5 max-w-xl font-display text-4xl leading-[1.08] sm:text-5xl">
-                Guidance built on relationship first, client first.
+                {t('home.intro.heading')}
               </h2>
             </Reveal>
             <Reveal delay={160}>
@@ -73,17 +75,13 @@ export default function Intro() {
               </div>
             </Reveal>
             <Reveal delay={240}>
-              <p className="mt-7 max-w-prose font-sans text-[1.05rem] leading-relaxed text-ink-soft">
-                For more than thirty years, Ashok Sanghavi has helped individuals, families and business owners
-                make calm, confident decisions about their money. A Certified Financial Planner with a Chartered
-                Accountant background from India, he brings the full picture together, tax, retirement, protection
-                and legacy, under one trusted roof.
+              <p className="mt-7 max-w-prose whitespace-pre-line font-sans text-[1.05rem] leading-relaxed text-ink-soft">
+                {t('home.intro.body1')}
               </p>
             </Reveal>
             <Reveal delay={300}>
-              <p className="mt-4 max-w-prose font-sans text-[1.05rem] leading-relaxed text-ink-soft">
-                His practice operates under {`Global Financial Group LLC`}, with a simple belief at its centre.
-                The relationship comes first, and your interests always come first.
+              <p className="mt-4 max-w-prose whitespace-pre-line font-sans text-[1.05rem] leading-relaxed text-ink-soft">
+                {t('home.intro.body2')}
               </p>
             </Reveal>
             <Reveal delay={360}>

@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion'
 import Reveal from '../components/Reveal'
 import Icon from '../components/Icons'
 import Marquee from '../components/Marquee'
@@ -111,16 +112,46 @@ export default function Testimonials() {
       <div className="container-lux relative">
         <Reveal delay={120}>
           <div className="mt-14 flex justify-center">
-            <a
+            <motion.a
               href={GOOGLE_REVIEWS_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2.5 rounded-full border border-gold/30 bg-white px-6 py-3 font-sans text-[0.92rem] font-semibold text-ink shadow-soft transition-all duration-300 hover:-translate-y-0.5 hover:border-gold hover:shadow-lift"
+              initial="rest"
+              animate="rest"
+              whileHover="hover"
+              whileTap="tap"
+              variants={{
+                rest: { y: 0, scale: 1, boxShadow: '0 8px 20px -12px rgba(14,58,40,0.28)' },
+                hover: { y: -3, scale: 1.035, boxShadow: '0 22px 44px -18px rgba(14,58,40,0.5)' },
+                tap: { scale: 0.97, y: -1 },
+              }}
+              transition={{ type: 'spring', stiffness: 380, damping: 24 }}
+              className="group relative inline-flex items-center gap-2.5 overflow-hidden rounded-full border border-gold/40 bg-white px-6 py-3 font-sans text-[0.92rem] font-semibold text-ink"
             >
-              <GoogleG size={20} />
-              Read all our reviews on Google
-              <Icon name="arrowUpRight" size={16} className="text-gold" />
-            </a>
+              {/* gold sheen sweep on hover */}
+              <motion.span
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-0"
+                variants={{ rest: { x: '-130%' }, hover: { x: '130%' } }}
+                transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
+                style={{ background: 'linear-gradient(105deg, transparent 30%, rgba(198,162,83,0.22) 50%, transparent 70%)' }}
+              />
+              <motion.span
+                className="relative"
+                variants={{ rest: { rotate: 0, scale: 1 }, hover: { rotate: [0, -12, 8, 0], scale: 1.14 } }}
+                transition={{ duration: 0.6, ease: 'easeInOut' }}
+              >
+                <GoogleG size={20} />
+              </motion.span>
+              <span className="relative">Read all our reviews on Google</span>
+              <motion.span
+                className="relative text-gold"
+                variants={{ rest: { x: 0, y: 0 }, hover: { x: 3, y: -3 } }}
+                transition={{ type: 'spring', stiffness: 400, damping: 18 }}
+              >
+                <Icon name="arrowUpRight" size={16} />
+              </motion.span>
+            </motion.a>
           </div>
         </Reveal>
       </div>
