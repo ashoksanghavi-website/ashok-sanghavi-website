@@ -10,7 +10,7 @@ import { serviceDetails } from '../lib/content'
 import { useSiteContent } from '../lib/useSiteContent'
 
 export default function ServiceDetail() {
-  const { t } = useSiteContent()
+  const { t, img } = useSiteContent()
   const { slug } = useParams()
   const service = services.find((s) => s.slug === slug)
   const detail = serviceDetails[slug]
@@ -34,7 +34,7 @@ export default function ServiceDetail() {
         title={service.title}
         intro={tagline}
         crumbs={[{ label: 'Home', to: '/' }, { label: 'Services', to: '/services' }, { label: service.title }]}
-        image={`/media/service-${slug}.jpg`}
+        image={img(`service.${slug}.image`)}
         imageLabel={service.title}
         imageIcon={service.icon}
       />

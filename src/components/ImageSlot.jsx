@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Parallax from './Parallax'
 import Icon from './Icons'
 
@@ -17,6 +17,9 @@ export default function ImageSlot({
   rounded = 'rounded-[1.3rem]',
 }) {
   const [failed, setFailed] = useState(!src)
+  // Reset when the src changes (e.g. blog list swaps its fallback for the real
+  // cover once posts load), otherwise a stale error keeps the placeholder up.
+  useEffect(() => setFailed(!src), [src])
 
   const img = (
     <img

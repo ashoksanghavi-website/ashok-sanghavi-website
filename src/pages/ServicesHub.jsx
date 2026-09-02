@@ -65,7 +65,7 @@ export default function ServicesHub() {
                 >
                   <div className="relative aspect-[16/11] overflow-hidden">
                     <img
-                      src={`/media/service-${s.slug}.jpg`}
+                      src={img(`service.${s.slug}.image`)}
                       alt={s.title}
                       loading="lazy"
                       className="service-tile-img h-full w-full object-cover"

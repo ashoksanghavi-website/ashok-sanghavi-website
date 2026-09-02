@@ -175,6 +175,7 @@ export const contentSchema = [
         return {
           label: `Service: ${s.title}`,
           fields: [
+            IMG(`service.${s.slug}.image`, 'Image', `/media/service-${s.slug}.jpg`),
             T(`service.${s.slug}.tagline`, 'Tagline', d.tagline),
             M(`service.${s.slug}.overview`, 'Overview', d.overview),
             M(`service.${s.slug}.forWho`, 'Who it is for (one per line)', d.forWho.join('\n')),
