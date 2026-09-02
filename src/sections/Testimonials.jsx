@@ -32,7 +32,7 @@ function Card(r, i) {
   return (
     <figure
       key={i}
-      className="flex h-full w-[330px] shrink-0 flex-col rounded-2xl border border-gold/20 bg-cream p-7 sm:w-[380px]"
+      className="flex h-[21rem] w-[330px] shrink-0 flex-col rounded-2xl border border-gold/20 bg-cream p-7 sm:w-[380px]"
     >
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
@@ -54,7 +54,9 @@ function Card(r, i) {
         </div>
         <GoogleG size={20} />
       </div>
-      <p className="mt-5 flex-1 font-display text-[1.05rem] leading-[1.5] text-emerald">{r.quote}</p>
+      <p className="mt-5 flex-1 overflow-hidden font-display text-[1.02rem] leading-[1.5] text-emerald [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:7]">
+        {r.quote}
+      </p>
       <div className="mt-6 flex items-center justify-between border-t border-gold/15 pt-4">
         <Stars n={r.stars} />
         <span className="font-sans text-[0.72rem] uppercase tracking-[0.16em] text-ink-muted">Google review</span>

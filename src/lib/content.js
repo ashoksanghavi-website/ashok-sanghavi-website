@@ -305,14 +305,14 @@ export const partners = [
 export const reviews = [
   {
     quote:
-      'Ashok has been our financial planner for over a decade. His goal is to give his clients peace of mind and that is exactly what he accomplishes. He has a measured approach and is always available for questions or consultations. We have been thrilled with his attention to detail, simplicity of explanation, and with knowing our financials are in excellent shape and growing. Ashok’s financial plans ensure long-term success, not just short-term windfalls. Recommend 10/10.',
+      'Ashok has been our financial planner for over a decade. He has a measured approach, is always available, and explains everything simply. His plans ensure long-term success, not just short-term windfalls. We know our finances are in excellent shape and growing. Recommend 10/10.',
     name: 'Vidhi S.',
     role: 'Client of over a decade',
     stars: 5,
   },
   {
     quote:
-      'Working with Ashok Sanghavi has been a great experience. He is knowledgeable, responsive, and truly takes the time to understand my financial goals. I appreciate how clearly he explains investment strategies and always keeps my best interests in mind. I feel confident about my financial future thanks to his guidance and would highly recommend him to anyone looking for trustworthy and professional advice.',
+      'Working with Ashok Sanghavi has been a great experience. He is knowledgeable, responsive, and truly takes the time to understand my financial goals. He explains investment strategies clearly and always keeps my best interests in mind. I highly recommend him.',
     name: 'Karan Bhagchandani',
     role: 'Investment planning',
     stars: 5,
@@ -333,7 +333,7 @@ export const reviews = [
   },
   {
     quote:
-      'We are incredibly grateful for the support and guidance that Ashok Sanghavi provided during one of the most difficult times in our lives. After my father passed away recently, Ashok was compassionate, patient, and truly went above and beyond to help us navigate everything. His professionalism and genuine care made a heavy situation feel much more manageable. We could not have asked for better support and highly recommend him to anyone looking for someone knowledgeable and kind.',
+      'We are incredibly grateful for the guidance Ashok Sanghavi provided during one of the most difficult times in our lives. After my father passed away, he was compassionate, patient, and went above and beyond. His genuine care made a heavy situation feel much more manageable.',
     name: 'Laura Deluca',
     role: 'Estate and legacy planning',
     stars: 5,
@@ -347,7 +347,7 @@ export const reviews = [
   },
   {
     quote:
-      'If you need financial planning and advice on wealth management, this is the firm to go to. They give good advice, help manage for your future, plan out for kids and build wealth. They have good financial firms they work with and policies that are suitable for various stages in life.',
+      'If you need financial planning and advice on wealth management, this is the firm to go to. They give good advice, help manage your future, plan for your kids and build wealth, with policies suitable for every stage of life.',
     name: 'Abhi G',
     role: 'Wealth management',
     stars: 5,

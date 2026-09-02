@@ -27,8 +27,7 @@ export default function About() {
       <section className="bg-ivory py-24 sm:py-28">
         <div className="container-lux grid items-center gap-14 lg:grid-cols-[0.82fr_1fr] lg:gap-20">
           <Reveal className="mx-auto w-full max-w-sm lg:max-w-none">
-            {/* EDIT: drop portrait at /public/portrait.jpg */}
-            <ImageSlot src="/portrait.jpg" label="Portrait of Ashok Sanghavi" ratio="4 / 5" framed parallax />
+            <ImageSlot src="/family.webp" label="Ashok Sanghavi with family" ratio="4 / 3" framed parallax />
             <div className="mt-9 flex justify-center">
               <div className="flex items-center gap-3 whitespace-nowrap rounded-full border border-gold/40 bg-ivory px-6 py-3.5 shadow-soft">
                 <span className="font-display text-[1.05rem] text-emerald">Ashok Sanghavi</span>

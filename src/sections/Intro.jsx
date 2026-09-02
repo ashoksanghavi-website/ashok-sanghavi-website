@@ -14,12 +14,11 @@ export default function Intro() {
             <div className="relative">
               <div className="pointer-events-none absolute -inset-3 rounded-[1.6rem] border border-gold/40" />
               <div className="pointer-events-none absolute -inset-3 rounded-[1.6rem] shadow-lift" />
-              <div className="relative overflow-hidden rounded-[1.3rem] bg-cream" style={{ aspectRatio: '4 / 5' }}>
+              <div className="relative overflow-hidden rounded-[1.3rem] bg-cream" style={{ aspectRatio: '4 / 3' }}>
                 <Parallax amount={70} className="absolute inset-0 h-[118%] -top-[9%]">
-                  {/* EDIT: drop the portrait at /public/portrait.jpg */}
                   <img
-                    src="/portrait.jpg"
-                    alt="Ashok Sanghavi"
+                    src="/family.webp"
+                    alt="Ashok Sanghavi with family"
                     className="h-full w-full object-cover"
                     onError={(e) => {
                       e.currentTarget.style.display = 'none'
