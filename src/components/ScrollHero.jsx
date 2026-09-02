@@ -180,13 +180,14 @@ export default function ScrollHero() {
   const target = useRef(0)
   const [ready, setReady] = useState(false)
   const [reduce, setReduce] = useState(false)
-  // Touch devices (phones/tablets) get the lightweight looping-video hero.
-  const [isMobile] = useState(() => typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches)
+  // Phones (< 768px) get the lightweight looping-video hero; tablets and
+  // desktops keep the scroll-scrub sequence, which works well on their width.
+  const [isMobile] = useState(() => typeof window !== 'undefined' && window.matchMedia('(max-width: 767px)').matches)
 
   // Preload the frame sequence (desktop only — phones show just the poster).
   // As each frame arrives we nudge the render loop so the canvas fills in.
   useEffect(() => {
-    const isTouch = window.matchMedia('(pointer: coarse)').matches
+    const isTouch = window.matchMedia('(max-width: 767px)').matches
     if (isTouch) return
     const imgs = framesRef.current
     for (let i = 0; i < FRAME_COUNT; i++) {
@@ -201,7 +202,7 @@ export default function ScrollHero() {
   // Scroll → progress via ScrollTrigger; video seek + caption timing in a rAF.
   useEffect(() => {
     if (reduce) return
-    const isTouch = window.matchMedia('(pointer: coarse)').matches
+    const isTouch = window.matchMedia('(max-width: 767px)').matches
     const wrap = wrapRef.current
     if (!wrap) return
 
