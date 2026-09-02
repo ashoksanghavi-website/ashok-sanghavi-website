@@ -5,7 +5,7 @@ export const firm = {
   short: 'Ashok Sanghavi',
   phone: '1-866-800-4771',
   phoneHref: 'tel:+18668004771',
-  email: 'info@ashoksanghavi.com',
+  email: 'asanghavi@aol.com',
   address: {
     line1: '25416 County 6 Road, Suite 102',
     line2: 'Elkhart, IN 46514',

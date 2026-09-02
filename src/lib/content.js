@@ -309,6 +309,7 @@ export const reviews = [
     name: 'Vidhi S.',
     role: 'Client of over a decade',
     stars: 5,
+    image: '/reviews/vidhi-s.webp',
   },
   {
     quote:
@@ -316,6 +317,7 @@ export const reviews = [
     name: 'Karan Bhagchandani',
     role: 'Investment planning',
     stars: 5,
+    image: '/reviews/karan-bhagchandani.webp',
   },
   {
     quote:
@@ -323,6 +325,7 @@ export const reviews = [
     name: 'Ankith Chandra',
     role: 'Local Guide',
     stars: 5,
+    image: '/reviews/ankith-chandra.webp',
   },
   {
     quote:
@@ -330,6 +333,7 @@ export const reviews = [
     name: 'Sheel Sheth',
     role: 'Financial planning',
     stars: 5,
+    image: '/reviews/sheel-sheth.webp',
   },
   {
     quote:
@@ -337,6 +341,7 @@ export const reviews = [
     name: 'Laura Deluca',
     role: 'Estate and legacy planning',
     stars: 5,
+    image: '/reviews/laura-deluca.webp',
   },
   {
     quote:
@@ -344,6 +349,7 @@ export const reviews = [
     name: 'Krishna Jasani',
     role: 'Financial planning',
     stars: 5,
+    image: '/reviews/krishna-jasani.webp',
   },
   {
     quote:
@@ -351,6 +357,7 @@ export const reviews = [
     name: 'Abhi G',
     role: 'Wealth management',
     stars: 5,
+    image: '/reviews/abhi-g.webp',
   },
   {
     quote:
@@ -358,6 +365,7 @@ export const reviews = [
     name: 'Sukhram Bishnoi',
     role: 'Life insurance',
     stars: 5,
+    image: '/reviews/sukhram-bishnoi.webp',
   },
 ]
 
