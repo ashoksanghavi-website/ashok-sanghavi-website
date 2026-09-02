@@ -2,7 +2,8 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { heroScenes } from '../lib/site'
+import { firm, heroScenes } from '../lib/site'
+import { useSchedule } from './ScheduleModal'
 import CountUp from './CountUp'
 
 const POSTER = '/hero/poster-v2.jpg'
@@ -75,6 +76,93 @@ const ss = (a, b, x) => {
   return t * t * (3 - 2 * t)
 }
 
+// ── Mobile / touch hero ─────────────────────────────────────────────
+// Phones and tablets get a compact, full-height hero with a muted, looping
+// background video instead of the desktop scroll-scrub. Native video playback
+// is buttery smooth and light, so scrolling stays snappy on mobile.
+function MobileHero() {
+  const openSchedule = useSchedule()
+  return (
+    <section className="relative h-[100svh] w-full overflow-hidden bg-emerald-deep">
+      <video
+        className="absolute inset-0 h-full w-full object-cover"
+        src="/hero/mobile.mp4"
+        poster={POSTER}
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
+        aria-hidden="true"
+        style={{ filter: 'contrast(1.05) saturate(1.07) brightness(1.02)' }}
+      />
+
+      {/* premium overlays — top + bottom depth and a left scrim for the copy */}
+      <div
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            'linear-gradient(180deg, rgba(14,58,40,0.55) 0%, rgba(14,58,40,0.12) 20%, rgba(14,58,40,0) 42%, rgba(14,58,40,0.15) 62%, rgba(14,58,40,0.78) 100%)',
+        }}
+      />
+      <div
+        className="pointer-events-none absolute inset-0"
+        style={{ background: 'linear-gradient(90deg, rgba(14,58,40,0.5) 0%, rgba(14,58,40,0.1) 45%, rgba(14,58,40,0) 70%)' }}
+      />
+      <div
+        className="pointer-events-none absolute inset-0 opacity-[0.12] mix-blend-overlay"
+        style={{
+          backgroundImage:
+            "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
+          backgroundSize: '200px 200px',
+        }}
+      />
+
+      {/* trust badge */}
+      <div className="absolute right-4 top-[calc(env(safe-area-inset-top,0px)+5rem)] z-20">
+        <div className="flex items-center gap-2.5 rounded-full border border-gold/40 bg-ivory/12 px-3.5 py-2 backdrop-blur-md">
+          <span className="relative flex h-2 w-2">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-sage-light opacity-70" />
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-sage-light" />
+          </span>
+          <span className="font-sans text-[0.74rem] font-semibold leading-none text-ivory">
+            <CountUp value={30} suffix="+" className="text-gold-light" /> <span className="text-ivory/85">Years of Trust</span>
+          </span>
+        </div>
+      </div>
+
+      {/* headline + CTA, anchored low */}
+      <div className="absolute inset-x-0 bottom-[13vh] z-20 px-6">
+        <p className="eyebrow text-gold-light" style={{ textShadow: '0 2px 18px rgba(14,58,40,0.6)' }}>
+          {heroScenes[0].eyebrow}
+        </p>
+        <h1
+          className="mt-4 max-w-[19rem] font-display text-[2.05rem] leading-[1.1] text-ivory"
+          style={{ textShadow: '0 2px 30px rgba(14,58,40,0.65)' }}
+        >
+          {heroScenes[0].line}
+        </h1>
+        <div className="mt-7 flex flex-col gap-3">
+          <button type="button" onClick={openSchedule} className="btn-gold w-full justify-center">
+            Book a consultation
+          </button>
+          <a href={firm.phoneHref} className="text-center font-sans text-[0.95rem] text-ivory/85" style={{ color: '#F5F0E6' }}>
+            or call {firm.phone}
+          </a>
+        </div>
+      </div>
+
+      {/* scroll hint */}
+      <div className="absolute bottom-5 left-1/2 z-20 flex -translate-x-1/2 flex-col items-center gap-1.5">
+        <span className="font-sans text-[0.58rem] uppercase tracking-[0.32em] text-ivory/55">Scroll</span>
+        <span className="relative h-8 w-[16px] rounded-full border border-ivory/40">
+          <span className="absolute left-1/2 top-1.5 h-1.5 w-[3px] -translate-x-1/2 animate-bounce rounded-full bg-gold-light" />
+        </span>
+      </div>
+    </section>
+  )
+}
+
 export default function ScrollHero() {
   const wrapRef = useRef(null)
   const stageRef = useRef(null)
@@ -91,6 +179,8 @@ export default function ScrollHero() {
   const target = useRef(0)
   const [ready, setReady] = useState(false)
   const [reduce, setReduce] = useState(false)
+  // Touch devices (phones/tablets) get the lightweight looping-video hero.
+  const [isMobile] = useState(() => typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches)
 
   // Preload the frame sequence (desktop only — phones show just the poster).
   // As each frame arrives we nudge the render loop so the canvas fills in.
@@ -276,6 +366,9 @@ export default function ScrollHero() {
       </section>
     )
   }
+
+  // Mobile / touch: the looping-video hero (no heavy scroll-scrub).
+  if (isMobile) return <MobileHero />
 
   const scrollVh = heroScenes.length * 120
 
