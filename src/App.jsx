@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useLayoutEffect } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
 import { AnimatePresence } from 'framer-motion'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -25,14 +25,32 @@ import ComingSoon from './pages/ComingSoon'
 import Admin from './admin/Admin'
 import { useSmoothScroll, getLenis } from './lib/useSmoothScroll'
 
+// Turn off the browser's own scroll restoration — with the tall scroll-scrub
+// hero it was restoring a stale position and dumping you at the footer when you
+// came back to a page. We take a page to the top ourselves on every navigation.
+if (typeof history !== 'undefined' && 'scrollRestoration' in history) {
+  history.scrollRestoration = 'manual'
+}
+
 function ScrollManager() {
   const { pathname } = useLocation()
-  useEffect(() => {
+  useLayoutEffect(() => {
     const lenis = getLenis()
-    if (lenis) lenis.scrollTo(0, { immediate: true })
-    else window.scrollTo(0, 0)
-    const t = setTimeout(() => ScrollTrigger.refresh(), 260)
-    return () => clearTimeout(t)
+    const toTop = () => {
+      if (lenis) lenis.scrollTo(0, { immediate: true, force: true })
+      else window.scrollTo(0, 0)
+    }
+    toTop()
+    // Re-assert a few times so the hero mounting / ScrollTrigger settling can't
+    // leave the page scrolled part-way down.
+    const r = requestAnimationFrame(toTop)
+    const t1 = setTimeout(toTop, 120)
+    const t2 = setTimeout(() => { ScrollTrigger.refresh(); toTop() }, 320)
+    return () => {
+      cancelAnimationFrame(r)
+      clearTimeout(t1)
+      clearTimeout(t2)
+    }
   }, [pathname])
   return null
 }

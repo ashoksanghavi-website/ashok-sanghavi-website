@@ -295,7 +295,6 @@ export const partners = [
   { label: 'National Retirement Foundation', href: 'https://site.nationalretirementfoundation.com/main' },
   { label: 'HTK', href: 'https://www.htk.com/' },
   { label: 'FFR', href: 'https://ffrmembers.com/home' },
-  { label: 'ABS', href: 'https://www.absgo.com/' },
 ]
 
 // -------- Reviews --------
