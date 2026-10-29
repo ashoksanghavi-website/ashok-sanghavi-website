@@ -37,16 +37,16 @@ function Wordmark({ compact, light }) {
       </span>
       <span className="leading-tight">
         <span
-          className="block font-display text-[1.05rem] sm:text-[1.15rem] tracking-tight transition-colors duration-500"
-          style={{ color: light ? '#FBF8F1' : 'var(--emerald)' }}
+          className="block font-display font-semibold text-[1.1rem] sm:text-[1.22rem] tracking-[-0.01em] transition-colors duration-500"
+          style={{ color: light ? '#FBF8F1' : '#0C3222', textShadow: light ? '0 1px 10px rgba(8,30,20,0.55)' : 'none' }}
         >
           Ashok Sanghavi
         </span>
         {/* gold rule + motto, echoing the brand lockup */}
         <span className="mt-1 block h-px w-6 bg-gold transition-all duration-500 sm:w-7" />
         <span
-          className="mt-1 block font-sans text-[0.5rem] uppercase tracking-[0.2em] transition-colors duration-500 sm:text-[0.54rem]"
-          style={{ color: light ? 'rgba(207,225,213,0.85)' : 'var(--ink-muted, #6E7B72)' }}
+          className="mt-1 block font-sans text-[0.52rem] font-semibold uppercase tracking-[0.24em] transition-colors duration-500 sm:text-[0.56rem]"
+          style={{ color: light ? 'rgba(226,236,230,0.95)' : '#3F5349', textShadow: light ? '0 1px 8px rgba(8,30,20,0.5)' : 'none' }}
         >
           Peace of mind through planning
         </span>
