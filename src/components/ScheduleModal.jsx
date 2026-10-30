@@ -2,6 +2,7 @@ import { createContext, useCallback, useContext, useEffect, useState } from 'rea
 import { AnimatePresence, motion } from 'framer-motion'
 import Icon from './Icons'
 import { firm } from '../lib/site'
+import { submitEnquiry } from '../lib/enquiry'
 
 // A centred "schedule a meeting" popup, opened from any CTA via useSchedule().
 // It collects an email and a preferred time, can be cancelled, and stores the
@@ -56,11 +57,7 @@ function ScheduleModal({ open, onClose }) {
     const message = [when && `Preferred time: ${when}`, f.message].filter(Boolean).join('\n')
     try {
       setStatus('sending')
-      const res = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify({ name: f.name, email: f.email, phone: f.phone, message, source: 'schedule' }),
-      })
+      const res = await submitEnquiry({ name: f.name, email: f.email, phone: f.phone, message, source: 'schedule' })
       setStatus(res.ok ? 'done' : 'error')
     } catch {
       setStatus('error')

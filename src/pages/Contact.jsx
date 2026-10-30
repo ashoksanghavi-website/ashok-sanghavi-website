@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { submitEnquiry } from '../lib/enquiry'
 import PageTransition from '../components/PageTransition'
 import Seo from '../components/Seo'
 import PageHero from '../components/PageHero'
@@ -33,11 +34,7 @@ export default function Contact() {
     const data = Object.fromEntries(new FormData(e.currentTarget).entries())
     try {
       setStatus('sending')
-      const res = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify({ ...data, source: 'contact' }),
-      })
+      const res = await submitEnquiry({ ...data, source: 'contact' })
       setStatus(res.ok ? 'done' : 'error')
     } catch {
       setStatus('error')

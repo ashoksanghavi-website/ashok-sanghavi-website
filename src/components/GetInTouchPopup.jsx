@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import Icon from './Icons'
 import { firm } from '../lib/site'
+import { submitEnquiry } from '../lib/enquiry'
 
 // ─────────────────────────────────────────────────────────────────────────────
 const SESSION_KEY = 'gitPopupDismissed'
@@ -45,11 +46,7 @@ export default function GetInTouchPopup() {
     const data = Object.fromEntries(new FormData(e.currentTarget).entries())
     try {
       setStatus('sending')
-      const res = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify({ ...data, source: 'popup' }),
-      })
+      const res = await submitEnquiry({ ...data, source: 'popup' })
       setStatus(res.ok ? 'done' : 'error')
     } catch {
       setStatus('error')
